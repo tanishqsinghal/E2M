@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	h2.page-header Login
+	p Login using form below
+
+	form(method = 'post', action = '/users/login')
+		.form-group
+		label Username
+		input.form-control(name = 'email', type = 'text', placeholder = 'Email')
+		.form-group
+		label Password
+		input.form-control(name = 'password', type = 'password', placeholder = 'Password')
+		input.btn.btn-primary(type = 'submit', name = 'submit' value = 'Login')

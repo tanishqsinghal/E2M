@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title Nav
+    link(rel='stylesheet', type='text/css', href='/stylesheets/style.css')
+  body
+    ul
+      if user
+       li(class = (title == 'E2M' ? 'active' : ''))
+         a(href='/') Members
+      if !user
+       li(class = (title == 'Register' ? 'active' : ''))
+         a(href='/users/register') Register
+       li(class = (title == 'Login' ? 'active' : ''))
+         a(href='/users/login') Login
+      if user
+       li(style='float:right')
+         a.active(href='/users/logout') Logout
+     != messages()
+    block content
