@@ -22,7 +22,7 @@ var usersRouter = require('./routes/users');
 var artistsRouter = require('./routes/artists');
 var searchRouter = require('./routes/scrh');
 var serviceRouter = require('./routes/services');
-var artistRouter=require('./routes/artists);
+var artistRouter=require('./routes/artists');
 
 var app = express();
 
