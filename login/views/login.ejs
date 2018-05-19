@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h2 class="page-header">Login</h2>
+<p>Login using form below</p>
+<form method="post" action="/users/login">
+  <div class="form-group"></div>
+  <label>Email</label>
+  <input name="email" type="text" placeholder="Email" class="form-control"/>
+  <div class="form-group"></div>
+  <label>Password</label>
+  <input name="password" type="password" placeholder="Password" class="form-control"/>
+  <input type="submit" name="submit" value="Login" class="btn btn-primary"/>
+</form>
+
+
+<%/*extends layout
+
+block content
+	h2.page-header Login
+	p Login using form below
+
+	form(method = 'post', action = '/users/login')
+		.form-group
+		label Email
+		input.form-control(name = 'email', type = 'text', placeholder = 'Email')
+		.form-group
+		label Password
+		input.form-control(name = 'password', type = 'password', placeholder = 'Password')
+		input.btn.btn-primary(type = 'submit', name = 'submit' value = 'Login') */%>
+
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+extends layout
+
+block extraheader
+    meta(charset='utf-8')
+    title Dashboard
+    // Facebook and Twitter integration
+    meta(property='og:title', content='')
+    meta(property='og:image', content='')
+    meta(property='og:url', content='')
+    meta(property='og:site_name', content='')
+    meta(property='og:description', content='')
+    meta(name='twitter:title', content='')
+    meta(name='twitter:image', content='')
+    meta(name='twitter:url', content='')
+    meta(name='twitter:card', content='')
+    // <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    // Animate.css
+    link(rel='stylesheet', href='/stylesheets/animate.css')
+    // Icomoon Icon Fonts
+    link(rel='stylesheet', href='/stylesheets/icomoon.css')
+    // Bootstrap
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    // Theme style
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    // Modernizr JS
+    script(src='/js/modernizr-2.6.2.min.js')
+    // FOR IE9 below
+    //if lt IE 9
+      script(src='/js/respond.min.js')
+block content
+    .fh5co-loader
+    #page
+      nav.fh5co-nav(role='navigation')
+        .container
+          .fh5co-top-logo
+            #fh5co-logo
+              a(href='index.html') ARTIST
+          .fh5co-top-menu.menu-1.text-center
+            ul
+              li
+                a(href='work.html') Work
+              li
+                a(href='about.html') Profile
+              li.has-dropdown
+                a(href='#') Dropdown
+                ul.dropdown
+                  li
+                    a(href='#') Web Design
+                  li
+                    a(href='#') eCommerce
+                  li
+                    a(href='#') Branding
+                  li
+                    a(href='#') API
+              li
+                a(href='contact.html') Contact
+          .fh5co-top-social.menu-1.text-right
+            ul.fh5co-social
+              li
+                a(href='#')
+                  i.icon-twitter
+              li
+                a(href='#')
+                  i.icon-dribbble
+              li
+                a(href='#')
+                  i.icon-github
+      #fh5co-work
+        .container
+          .row.top-line.animate-box
+            .col-md-7.col-md-push-5.text-left.intro
+              h2
+                | Shift is a free html5 template to showcase your work. 
+                span.fh5co-highlight
+                  | Made with 
+                  i.icon-heart2
+                  |  by 
+                  a(href='http://freehtml5.co') FreeHTML5.co
+              // <h2>Shift is a Collection of a Beautiful &amp; Premium Themes.</h2>
+          .row
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-1.jpg);')
+                  .inner
+                    .desc
+                      h3 Folding Light
+                      span.cat Branding
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-2.jpg);')
+                  .inner
+                    .desc
+                      h3 Power Led Light
+                      span.cat Illustration
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-3.jpg);')
+                  .inner
+                    .desc
+                      h3 Elephant Origami
+                      span.cat Logo
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-4.jpg);')
+                  .inner
+                    .desc
+                      h3 Electric Kick Scooter
+                      span.cat Web Design
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-5.jpg);')
+                  .inner
+                    .desc
+                      h3 Shark Diver
+                      span.cat Branding
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-6.jpg);')
+                  .inner
+                    .desc
+                      h3 Objekte Unserer Tage Berlin
+                      span.cat Logo
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-7.jpg);')
+                  .inner
+                    .desc
+                      h3 Aloha Shirt
+                      span.cat Web Design
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-8.jpg);')
+                  .inner
+                    .desc
+                      h3 Olafur Elliasson Waterfall Versailles
+                      span.cat Branding
+            .col-md-4.text-center.animate-box
+              a.work(href='portfolio_detail.html')
+                .work-grid(style='background-image:url(/images/project-9.jpg);')
+                  .inner
+                    .desc
+                      h3 Hand Care
+                      span.cat Logo
+      #fh5co-author.fh5co-bg-section
+        .container
+          .row.animate-box
+            .col-md-8.col-md-offset-2.text-center.fh5co-heading
+              h2 A little about me
+          .row
+            .col-md-8.col-md-offset-2
+              .author
+                .author-inner.animate-box(style='background-image: url(/images/person3.jpg);')
+                .desc.animate-box
+                  span Web Designer & Developer
+                  h3 Mike Airways
+                  p
+                    | Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
+                  p
+                    a.btn.btn-primary.btn-outline(href='about.html') Learn More
+                  ul.fh5co-social-icons
+                    li
+                      a(href='#')
+                        i.icon-facebook
+                    li
+                      a(href='#')
+                        i.icon-twitter
+                    li
+                      a(href='#')
+                        i.icon-dribbble
+                    li
+                      a(href='#')
+                        i.icon-github
+      #fh5co-started
+        .container
+          .row.animate-box
+            .col-md-8.col-md-offset-2.text-center.fh5co-heading
+              h2 Get Started
+              p
+                | We create beautiful themes for your site behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
+              p
+                a.btn.btn-primary(href='#') Let's work together
+      footer#fh5co-footer(role='contentinfo')
+        .container
+          .row.copyright
+            .col-md-12.text-center
+              p
+                small.block © 2016 Free HTML5. All Rights Reserved.
+                small.block
+                  | Designed by 
+                  a(href='http://freehtml5.co/', target='_blank') FreeHTML5.co
+                  |  Demo Images: 
+                  a(href='http://unsplash.co/', target='_blank') Unsplash
+                  |  & 
+                  a(href='http://blog.gessato.com/', target='_blank') Gessato
+              ul.fh5co-social-icons
+                li
+                  a(href='#')
+                    i.icon-twitter
+                li
+                  a(href='#')
+                    i.icon-facebook
+                li
+                  a(href='#')
+                    i.icon-linkedin
+                li
+                  a(href='#')
+                    i.icon-dribbble
+    .gototop.js-top
+      a.js-gotop(href='#')
+        i.icon-arrow-up
+    // jQuery
+    script(src='/js/jquery.min.js')
+    // jQuery Easing
+    script(src='/js/jquery.easing.1.3.js')
+    // Bootstrap
+    script(src='/js/bootstrap.min.js')
+    // Waypoints
+    script(src='/js/jquery.waypoints.min.js')
+    // Main
+    script(src='/js/main.js')
+

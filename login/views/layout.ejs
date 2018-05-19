@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nav</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+  </head>
+  <body>
+    <ul>
+      <li><a href="/users/register">Register</a></li>
+      <li><a href="/users/login">Login</a></li>
+      <li><a href="/artists/registerartist">Signup As Artist</a></li>
+    </ul>
+  </body>
+</html>
+
+<%/* doctype html
+html
+  head
+    title Nav
+    link(rel='stylesheet', type='text/css', href='/stylesheets/style.css')
+  body
+    ul
+      if user
+       li(class = (title == 'E2M' ? 'active' : ''))
+         a(href='/') Members
+      if !user
+       li(class = (title == 'Register' ? 'active' : ''))
+         a(href='/users/register') Register
+       li(class = (title == 'Login' ? 'active' : ''))
+         a(href='/users/login') Login
+       li(class = (title == 'Artist Sign Up' ? 'active' : ''))
+         a(href='/artists/registerartist') Signup As Artist
+      if user
+       li(style='float:right')
+         a.active(href='/users/logout') Logout
+     != messages()
+    block content */%>
+
+

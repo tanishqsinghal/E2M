@@ -39,14 +39,12 @@ router.get('/register', function(req, res, next) {
   res.render('register', {title: 'Register'});
 });
 
-
-
 router.get('/login', function(req, res, next) {
   res.render('login', {title: 'Login'});
 });
 
 router.post('/login',
-  passport.authenticate('local', {failureRedirect:'/users/login', failureFlash: 'Invalid username or password'}),
+  passport.authenticate('local', {failureRedirect:'/users/login', failureFlash: 'Invalid Email or password'}),
   function(req, res) {
     req.flash('success', 'Login Successful');
     res.redirect('/');
@@ -62,7 +60,7 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-passport.use(new LocalStrategy(function(email, password, done){
+passport.use(new LocalStrategy({usernameField: 'email', passwordField: 'password'}, function(email, password, done){
   User.getUserByEmail(email, function(err, user){
     if(err) throw err;
     if(!user){
@@ -116,6 +114,7 @@ router.get('/verify',function(req,res){
                 var query = { 'email': decodedMail };
                 user.active=true;
                 user.rand=undefined;
+                console.log('Verifying');
                 user.save(function(err){
                     if(err)
                         res.end("some error occured try after some time");
@@ -125,7 +124,7 @@ router.get('/verify',function(req,res){
                         //res.send("<h1>Email "+decodedMail+" is been Successfully verified");
                         req.flash('success', 'Email has been Successfully Verified');
                         res.location('/');
-                                  res.redirect('/');
+                        res.redirect('/');
                     }
 
                 });
@@ -172,12 +171,17 @@ router.post('/register', upload.single('profileimage'), function(req, res, next)
                 throw err;
             if(user)
                 {
-                    if(user.active)
-                    res.send("email already exist");
+                    if(user.active){
+                    res.send("email already exist : Login");
+                    //req.flash('success', 'Email already exist : Login');
+                    //res.location('/');
+                    //res.redirect('/login');
+
+                    }
                     else{
                         res.send("verification is pending");
-                        res.location('/');
-                                  res.redirect('/');
+                        //res.location('/');
+                          //        res.redirect('/');
                       }
                       return;
                 } 
