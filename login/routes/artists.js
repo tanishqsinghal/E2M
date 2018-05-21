@@ -36,15 +36,40 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/registerartist', function(req, res, next) {
-  res.render('registerartist', {title: 'Artist Sign Up'});
+router.post('/',function (req,res){
+  Artist.getArtistById(req.body.id,function(err,artist){
+    if(err){ 
+      console.log('JGFGHVGH');
+      throw err}
+    else
+    {
+      console.log('ArT');
+      res.render('artist',{artist:artist});
+    }
+  });
 });
+
+/*router.get('/registerartist', function(req, res, next) {
+  res.render('registerartist', {title: 'Artist Sign Up'});
+});*/
 
 router.post('/registerartist', function(req, res, next) {
   var name = req.body.name;
   var email = req.body.email;
   var catagory = req.body.catagory;
   var password = req.body.password;
+  var gender  = req.body.gender;
+  var age = req.body.age;
+  var address = req.body.address;
+  var city = req.body.city;
+  var state = req.body.state;
+  var qualification = req.body.qualification;
+  var specialization = req.body.specialization;
+  var bio = req.body.bio;
+  var pin = req.body.pin;
+  var link = req.body.link;
+  var phone = req.body.phone;
+
 
   // Form Validation
   req.checkBody('name', 'Name field is required').notEmpty();
@@ -55,18 +80,30 @@ router.post('/registerartist', function(req, res, next) {
 
   // Check Errors
   var errors = req.validationErrors();
-
   if(errors){
   	console.log('ERRRR');
-  	res.render('registerartist', {
+  	res.render('/', {
   		errors: errors
   	});
   }else{
   	var newArtist = new Artist({
-      name: name,
-  		email: email,
-  		catagory: catagory,
-      password: password,
+      	email: email,
+		password: password,
+		phone: phone,
+		name: name,
+		gender: gender,
+		age: age,
+		address: address,
+		city: city,
+		state: state,
+		//Rating: undefined,
+		qualification: qualification,
+		specialization: specialization,
+		sub_category: catagory,
+		small_description: bio,
+		pin: pin,
+		website_link: link,
+		//Photo: undefined,
       active: false,
       rand: Math.floor((Math.random() * 100) + 54)
   	});
@@ -80,16 +117,19 @@ router.post('/registerartist', function(req, res, next) {
   	res.redirect('/');
 */
           Artist.getArtistByEmail(newArtist.email, function(err, artist){
-            if(err)
+            if(err){
                 throw err;
+            }
             if(artist)
                 {
+                	console.log(newArtist.email);
+                	console.log(artist);
                     if(artist.active)
                     res.send("email already exist");
                     else{
                         res.send("verification is pending");
                        // res.location('/');
-                           //       res.redirect('/');
+                       //res.redirect('/');
                       }
                       return;
                 } 

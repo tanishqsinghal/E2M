@@ -551,6 +551,9 @@
 
 
         </li>
+
+        <%if (!user) { %>
+
         <li><a href="#modalLogin" data-toggle="modal" data-target="#modalLogin">
             Login
         </a>
@@ -559,6 +562,14 @@
                data-target="#modalSignUp">Sign
             Up</a>
         </li>
+
+        <% } %>
+
+        <li><a href="#modalSignUpArtist" class="btn btn-primary nav-btn" data-toggle="modal"
+               data-target="#modalSignUpArtist">Artist Sign
+            Up</a>
+        </li>
+
     </ul>
 </div>
 <!-- Login modal -->
@@ -844,6 +855,8 @@
         </div>
     </div>
 </footer>
+
+
 <!-- Login modal -->
 <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog width-400" role="document">
@@ -858,17 +871,16 @@
                         for you</p>
                 </div>
                 <div class="light p-40 b-t-b">
-                    <form action="dashboard2.html">
+                    <form method="post" action="/users/login">
                         <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                            <input type="text" class="form-control form-control-lg"
+                            <input name="email" type="email" class="form-control form-control-lg"
                                    placeholder="Email Address">
                         </div>
                         <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                            <input type="text" class="form-control form-control-lg"
+                            <input name="password" type="password" class="form-control form-control-lg"
                                    placeholder="Password">
                         </div>
                         <input type="submit" class="btn btn-primary btn-lg btn-block" value="Log In">
-                        <small class="forget-pass">Have you forgot your username or password ?</small>
                     </form>
                 </div>
                 <div class="p-40"><a href="#" class="btn btn-lg btn-block btn-social facebook">
@@ -910,22 +922,18 @@
                         <div class="light p-t-b-40">
                             <div class="p-40">
                                 <h5 class="p-b-20">Create New User Account</h5>
-                                <form action="dashboard2.html ">
+                                <form method="post" action="/users/register">
                                     <div class="form-group has-icon"><i class="icon-user-circle"></i>
-                                        <input type="text" class="form-control form-control-lg"
+                                        <input name="name" type="text" class="form-control form-control-lg"
                                                placeholder="Your Name">
                                     </div>
                                     <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input type="text" class="form-control form-control-lg"
+                                        <input name="email" type="email" class="form-control form-control-lg"
                                                placeholder="Email Address">
                                     </div>
                                     <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                                        <input type="text" class="form-control form-control-lg"
+                                        <input name="password" type="password" class="form-control form-control-lg"
                                                placeholder="Password">
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-repeat"></i>
-                                        <input type="text" class="form-control form-control-lg"
-                                               placeholder="Confirm Password">
                                     </div>
                                     <input type="submit" class="btn btn-primary btn-lg btn-block" value="Sign Up Now">
                                     <p class="forget-pass">A verification email wil be sent to you</p>
@@ -938,6 +946,113 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- Artist SignUp modal -->
+<div class="modal fade" id="modalSignUpArtist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+                                            class="paper-nav-toggle active"><i></i></a>
+            <div
+                    class="modal-body no-p">
+                <div class="row">
+                    <div class="col-lg-5 grid">
+                        <div class="p-40">
+                            <h5 class="p-t-40">Sign Up Using Social Account</h5>
+                            <p class="p-t-b-20">Hey Soldier welcome back signin now there is lot of new stuff waiting
+                                for you</p> <a href="#" class="btn btn-lg btn-block btn-social facebook">
+                            <i class="icon-facebook"></i> Login with Facebook
+                        </a>
+                            <a href="#" class="btn btn-lg btn-block btn-social twitter">
+
+                                <i class="icon-twitter"></i> Login with Twitter
+
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="light p-t-b-40">
+                            <div class="p-40">
+                                <h5 class="p-b-20">Create New Artist Account</h5>
+                                <form method="post" action="/artists/registerartist">
+                                    <div class="form-group has-icon"><i class="icon-user-circle"></i>
+                                        <input name="name" type="text" class="form-control form-control-lg"
+                                               placeholder="Your Name">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="email" type="email" class="form-control form-control-lg"
+                                               placeholder="Email Address">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="phone" type="tel" class="form-control form-control-lg"
+                                               placeholder="Phone Number">
+                                    </div>
+                                    <div >
+                                    	<select name="gender" class="form-control form-control-lg">
+										  <option value="Male">Male</option>
+										  <option value="Female">Female</option>
+										</select><br>
+                                        
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="age" type="text" class="form-control form-control-lg"
+                                               placeholder="Age">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="address" type="text" class="form-control form-control-lg"
+                                               placeholder="Street Address">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="city" type="text" class="form-control form-control-lg"
+                                               placeholder="City">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="state" type="text" class="form-control form-control-lg"
+                                               placeholder="State">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="pin" type="text" class="form-control form-control-lg"
+                                               placeholder="Pin Code">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="qualification" type="text" class="form-control form-control-lg"
+                                               placeholder="Qualification">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="specialization" type="text" class="form-control form-control-lg"
+                                               placeholder="Specialization">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                    	<input name="bio" type="text" class="form-control form-control-lg"
+                                               placeholder="Brief Bio">
+                                        
+                                        <!--<textarea name="bio" placeholder="Bio" style="width: 100%"></textarea><br>-->
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="catagory" type="text" class="form-control form-control-lg"
+                                               placeholder="Choose Catagory">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="link" type="text" class="form-control form-control-lg"
+                                               placeholder="Your Website Link">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-user-secret"></i>
+                                        <input name="password" type="password" class="form-control form-control-lg"
+                                               placeholder="Password">
+                                    </div>
+                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Sign Up Now">
+                                    <p class="forget-pass">A verification email wil be sent to you</p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 </div>

@@ -8,12 +8,15 @@
 <h1>This is a Heading</h1>
 <p>This is a paragraph.</p>
 <ul>
-	<% for(var i=0; i<artist.length; i++) {%>
-	<li>
-	    <a href="/"><%= artist[i] %></a>
-	</li>
+	<% for(var i=0; i < artist.length; i++) { %>
+	   <li>
+	   	<form id="myForm" action="/artists" method="post">
+	   	    <input type="hidden" name="id" value= <%= artist[i]._id %> />
+	   	    <a href="#" onclick="document.getElementById('myForm').submit();"><%= artist[i].name %></a>
+	   	</form>
+	   </li>
+	   <li><%= artist[i] %></li>
 	<% } %>
-	
 </ul>
 </body>
 </html>

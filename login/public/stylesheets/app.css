@@ -255,6 +255,7 @@ select,
 summary,
 textarea {
   touch-action: manipulation;
+  
 }
 
 table {

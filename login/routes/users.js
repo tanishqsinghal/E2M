@@ -35,18 +35,20 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/register', function(req, res, next) {
+/*router.get('/register', function(req, res, next) {
   res.render('register', {title: 'Register'});
-});
+});*/
 
 router.get('/login', function(req, res, next) {
   res.render('login', {title: 'Login'});
 });
 
 router.post('/login',
-  passport.authenticate('local', {failureRedirect:'/users/login', failureFlash: 'Invalid Email or password'}),
+  passport.authenticate('local', {failureRedirect:'/', failureFlash: 'Invalid Email or password'}),
   function(req, res) {
     req.flash('success', 'Login Successful');
+    //res.location('/');
+    //res.render('/', { title: 'E2M'});
     res.redirect('/');
 });
 
