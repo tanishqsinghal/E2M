@@ -8,25 +8,27 @@ var db = mongoose.connection;
 // User Schema
 var ArtistSchema = mongoose.Schema({
 	email:String,
-password:String,
-phone:Number,
-name:String,
-gender:String,
-age:Number,
-address:String,
-city:String,
-state:String,
-rating:String,
-qualification:String,
-specialization:String,
-sub_category:String,
-small_description:String,
-pin:Number,
-website_link:String,
-photo:String
+	password:String,
+	phone:Number,
+	name:String,
+	gender:String,
+	age:Number,
+	address:String,
+	city:String,
+	state:String,
+	rating: Number,
+	qualification:String,
+	specialization:String,
+	sub_category:String,
+	small_description:String,
+	pin:Number,
+	website_link:String,
+	photo:String,
+	active: Boolean,
+	rand: Number
 });
 
-var Artist = module.exports = mongoose.model('artists', ArtistSchema);
+var Artist = module.exports = mongoose.model('artists', ArtistSchema, 'artists');
 
 module.exports.getArtistByCategory = function(category, callback){
 	var query = {sub_category:category};
@@ -48,6 +50,18 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 	});
 }
 
+module.exports.getArtistByFilters=function(category,body,callback)
+{
+	var query=Artist.find({sub_category:category});
+	if(body.city!="all")
+		query=query.where({city:body.city});
+	if(body.ratingsort!=0)
+		query=query.sort({rating:body.ratingsort});
+	if(body.namesort!=0)
+		query=query.sort({name:body.namesort});
+	query.exec(callback);
+}
+
 module.exports.createArtist = function(newArtist, callback){
 	bcrypt.genSalt(10, function(err, salt) {
 	    bcrypt.hash(newArtist.password, salt, function(err, hash) {
@@ -57,4 +71,9 @@ module.exports.createArtist = function(newArtist, callback){
 	        newArtist.save(callback);
 	   });   
 	});	
+}
+module.exports.updateArtist=function(artist,callback){
+
+	
+	artist.save(callback);
 }

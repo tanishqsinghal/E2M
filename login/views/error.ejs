@@ -1,4 +1,12 @@
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1><%= error.status %></h1>
+<p><%= error.stack %></p>
+
+</body>
+</html>

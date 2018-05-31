@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= artist.name %></title>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Tanishq Singhal">
+    <link rel="icon" href="/images/basic/favicon.ico" type="image/x-icon">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/stylesheets/app.css">
+</head>
+<body>
+
+
+	<div>
+		<form action="/artists/add_event" method="Post">
+				<h5>Add event</h5>
+		   	    <input type="hidden" name="artist_id" value= "<%= artist._id %>">
+		   	    <label>Start date</label>
+			<input type="date" name="start_date">
+			<label>End date</label>
+			<input type="date" name="end_date">
+			<label>Address</label>
+			<input type="text" name="address">
+			<label>Other Details</label>
+			<input type="text" name="details">
+			<input type="submit" name="submit">
+		</form>
+	</div>
+
+	<div>
+		<p>Requests</p>
+		<ul>
+			<% for(var i=0; i < event.length; i++) { %>
+				<% if(event[i].status=="request") { %>
+
+			   <li><%= event[i] %></li>
+			   	   <div id="filter">
+			   	<form id="requestForm" action="/artists/acceptRequest" method="post">
+			   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+			   	   <input type="submit" value="accept" name="accept">
+			   	   <input type="submit" value="decline" name="accept">
+			   	</form>
+			   <div>
+			  <% } %>   
+			<% } %>
+		</ul>
+	</div>
+
+	<div>
+		<p>Current Work</p>
+		<ul>
+			<% for(var i=0; i < event.length; i++) { %>
+				<% if(event[i].status=="active") { %>
+			   
+			   <li><%= event[i] %></li>
+			   	   <div id="filter">
+			   	<form id="cancelForm" action="/artists/finishEvent" method="post">
+			   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+			   	   <input type="submit" value="End" name="finish">
+			   	</form>
+			   <div>
+			  <% } %>   
+			<% } %>
+		</ul>
+	</div>
+
+	<div class="nav-sticky">
+	    <!-- Header -->
+	    <nav class="mainnav navbar navbar-default justify-content-between">
+	       <div class="container relative">
+	           <a class="offcanvas dl-trigger paper-nav-toggle" type="button" data-toggle="offcanvas"
+	                   aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	               <i></i>
+	           </a>
+	           <a class="navbar-brand" href="index.html">
+	               <img class="d-inline-block align-top" alt="" src="/images/basic/logo.png">
+	           </a>
+	           <div class="paper_menu">
+	               <div id="dl-menu" class="xv-menuwrapper responsive-menu">
+	    <ul class="dl-menu align-items-center">
+	       
+	            <li><a href="/artists/logout">Logout</a>
+	            </li>        
+
+	    </ul>
+	</div></div></div></nav></div>
+
+	<div>
+		<table border="1px">
+			<caption>Artist Profile</caption>
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th>Result</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Name</td>
+					<td><%= artist.name %></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><%= artist.email %></td>
+				</tr>
+				<tr>
+					<td>Phone</td>
+					<td><%= artist.phone %></td>
+				</tr>
+				<tr>
+					<td>Gender</td>
+					<td><%= artist.gender %></td>
+				</tr>
+				<tr>
+					<td>Age</td>
+					<td><%= artist.age %></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><%= artist.address %></td>
+				</tr>
+				<tr>
+					<td>City</td>
+					<td><%= artist.city %></td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td><%= artist.state %></td>
+				</tr>
+				<tr>
+					<td>Pin</td>
+					<td><%= artist.pin %></td>
+				</tr>
+				<tr>
+					<td>Qualification</td>
+					<td><%= artist.qualification %></td>
+				</tr>
+				<tr>
+					<td>Specialization</td>
+					<td><%= artist.specialization %></td>
+				</tr>
+				<tr>
+					<td>Category</td>
+					<td><%= artist.sub_category %></td>
+				</tr>
+				<tr>
+					<td>Brief Bio</td>
+					<td><%= artist.small_description %></td>
+				</tr>
+				<tr>
+					<td>Website</td>
+					<td><a href="http://<%= artist.website_link %>" target = "_blank"><%= artist.website_link %></a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<a href="#modalUpdate" class="btn btn-primary nav-btn" data-toggle="modal"
+               data-target="#modalUpdate">Update Profile</a>
+
+    <!-- Update Profile-->
+	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i></i></a>
+	            <div class="modal-body no-p">
+	                
+	                        
+	                            <div class="p-40">
+	                                
+                                <form method="post" action="/artists/updateartist">
+                                    <div class="form-group has-icon"><i class="icon-user-circle"></i>
+                                        <input name="name" type="text" class="form-control form-control-lg"
+                                               placeholder="Your Name" value="<%= artist.name %>">
+                                    </div>
+                                    <div >
+                                    	<select name="gender" class="form-control form-control-lg">
+                                          <option value="Male" selected="selected">Male</option>
+										  <option value="Female">Female</option>
+										</select><br>
+                                        
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="age" type="text" class="form-control form-control-lg"
+                                               placeholder="Age" value="<%= artist.age %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="address" type="text" class="form-control form-control-lg"
+                                               placeholder="Street Address" value="<%= artist.address %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="city" type="text" class="form-control form-control-lg"
+                                               placeholder="City" value="<%= artist.city %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="state" type="text" class="form-control form-control-lg"
+                                               placeholder="State" value="<%= artist.state %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="pin" type="text" class="form-control form-control-lg"
+                                               placeholder="Pin Code" value="<%= artist.pin %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="qualification" type="text" class="form-control form-control-lg"
+                                               placeholder="Qualification" value="<%= artist.qualification %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="specialization" type="text" class="form-control form-control-lg"
+                                               placeholder="Specialization" value="<%= artist.specialization %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                    	<input name="bio" type="text" class="form-control form-control-lg"
+                                               placeholder="Brief Bio" value="<%= artist.small_description %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="link" type="text" class="form-control form-control-lg"
+                                               placeholder="Your Website Link" value="<%= artist.website_link %>">
+                                    </div>
+                                    <!--<div class="form-group has-icon"><i class="icon-user-secret"></i>
+                                        <input name="aimage" type="file" class="form-control form-control-lg"
+                                               placeholder="Profile Picture *" required>
+                                    </div>-->
+                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Update">
+                                </form>
+	                            </div>
+	                       
+	                             
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<script src="/js/app.js"></script>
+</body>
+</html>

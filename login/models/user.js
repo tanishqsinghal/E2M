@@ -16,11 +16,18 @@ var UserSchema = mongoose.Schema({
 	name: {
 		type: String
 	},
+	phone: Number,
+	gender: String,
+	age: String,
+	address: String,
+	city: String,
+	state: String,
+	pin: Number,
 	active: Boolean,
 	rand: Number
 });
 
-var User = module.exports = mongoose.model('users', UserSchema);
+var User = module.exports = mongoose.model('users', UserSchema, 'users');
 
 module.exports.getUserById = function(id, callback){
 	User.findById(id, callback);
@@ -46,4 +53,7 @@ module.exports.createUser = function(newUser, callback){
 	        newUser.save(callback);
 	   });   
 	});	
+}
+module.exports.updateUser=function(user,callback){
+	user.save(callback);
 }

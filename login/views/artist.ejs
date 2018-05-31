@@ -1,9 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery UI Datepicker - Display inline</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/stylesheets/app.css">
+
+
+
+	<script type="text/javascript">
+		function toggleLink(checkBox)
+		{
+		    var link = document.getElementById("agreeLink");
+
+		    if (checkBox.checked)
+		        link.style.display = "inline";
+		    else
+		        link.style.display = "none";
+		}	 
+	</script>
+
+	<style type="text/css">
+		.boxed {
+		    font-size: 14px;
+		    color: #0099ae;
+		    border: 1px solid #0099ae;
+		    font-family: 'Open Sans', sans-serif;
+		    font-weight: 300;
+		    padding: 10px 25px;
+		  }
+
+		 /*#boxed2 {
+		 	height: 5000px;
+		    width: 100%;
+		 }
+		 #dt-content {
+		  position: absolute;
+		  bottom: 25px;
+		  right: 25px;
+		}*/
+
+	</style>
+
 </head>
 <body>
+	
+	
 
 	<table border="1px">
 		<caption>Artist Profile</caption>
@@ -56,9 +102,202 @@
 			</tr>
 			<tr>
 				<td>Website</td>
-				<td><%= artist.website_link %></td>
+				<td><a href="http://<%= artist.website_link %>" target = "_blank"><%= artist.website_link %></a></td>
 			</tr>
 		</tbody>
 	</table>
+
+
+	<a href="#modalTerms" class="btn btn-primary nav-btn" data-toggle="modal"
+               data-target="#modalTerms">Hire</a>
+
+    <%if (chk) { console.log(chk);%>
+    <!-- Terms of Use-->
+	<div class="modal fade" id="modalTerms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i></i></a>
+	            <div class="modal-body no-p">
+	                
+	                        
+	                            <div class="p-40">
+	                                <h5 class="p-b-20">Terms of Use</h5>
+	                                <div class="boxed">
+									  1.ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+									  2.ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+									  3.ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+									  4.ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+									  5.ABCDEFGHIJKLMNOPQRSTUVWXYZ
+									</div>
+    									<p><input type="checkbox" id="agreeCheckbox" name="agreeCheckbox" value="agreeCheckbox" onchange="toggleLink(this);">By clicking this you agree to the term of use</p>
+
+	                                <p><a href="#modalDate" id="agreeLink" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalDate" style="display: none;">Next</a></p>
+
+	                            </div>
+	                       
+	                             
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<!-- Select Date-->
+	<div class="modal fade" id="modalDate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document" >
+	        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i></i></a>
+	            <div class="modal-body no-p">
+	                
+	                        
+	                            <div class="p-40" id="dt" >
+	                                <h5 class="p-b-20">Enter Your Details</h5>
+	                              	
+	                                <!--<form action="/user/date" method="post">
+	                                <label for="sdate">Start date</label>
+	                                <input id="sdate" name="sdate" type="date" min="2013-12-25" required>
+	                              	<script type="text/javascript">var today = new Date().toISOString().split('T')[0];
+	                              		document.getElementsByName("sdate")[0].setAttribute('min', today);
+	                              	</script>
+
+	                              	<label for="edate">End Date</label>
+	                              	<input id="edate" name="edate" type="date" min="2013-12-25" required>
+	                              	<script type="text/javascript">var today = new Date().toISOString().split('T')[0];
+	                              		document.getElementsByName("edate")[0].setAttribute('min', today);
+	                              	</script>
+     								
+									<a href="#modalTerms" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalTerms" id="dt-content">Hire</a>
+									</form>-->
+
+									<form method="post" action="/users/updateuser" id="updateform">	                                    
+										<div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="phone" type="tel" class="form-control form-control-lg" value="<%= user.phone %>" 
+	                                               placeholder="Phone Number*" required>
+	                                    </div>
+	                                    <div >
+	                                    	<select name="gender" class="form-control form-control-lg">
+	                                          <option value="Male" selected="selected">Male</option>
+											  <option value="Female">Female</option>
+											</select><br>
+	                                        
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="age" type="text" class="form-control form-control-lg" value="<%= user.age %>"
+	                                               placeholder="Age" required>
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="address" type="text" class="form-control form-control-lg" value="<%= user.address %>"
+	                                               placeholder="Street Address*" required>
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="city" type="text" class="form-control form-control-lg" value="<%= user.city %>"
+	                                               placeholder="City*" required>
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="state" type="text" class="form-control form-control-lg" value="<%= user.state %>"
+	                                               placeholder="State*" required>
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="pin" type="text" class="form-control form-control-lg" value="<%= user.pin %>"
+	                                               placeholder="Pin Code*" required>
+	                                    </div>
+
+	                                    <input type="text" name="artist_id" value= <%= artist._id %>
+											<label>start date</label>
+											<input type="date" name="start_date">
+											<label>end date</label>
+											<input type="date" name="end_date">
+											<label>small description</label>
+											<input type="text" name="details">
+											<input type="submit" name="submit">
+
+										</form>
+	                             	         
+	                                    <p><a href="#modalContact" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalContact">Next</a></p>
+	                                    
+	                                
+	                            </div>
+	                       
+	                    
+	                
+	            </div>
+	        </div>
+	    </div>   
+	</div>
+
+	<!-- Contact Artist-->
+	<div class="modal fade" id="modalContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i></i></a>
+	            <div class="modal-body no-p">
+	                
+	                        
+	                            <div class="p-40">
+	                                <h5 class="p-b-20">Contact information of Artist</h5>
+	                                <div class="boxed2">
+	                                	<p>Email  -  <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=<%= artist.email %>" target="_blank"><%= artist.email %></a><br>
+	                                	Phone  -  <%= artist.phone %></p>
+
+	                                	<h4>hire me</h4>
+										
+											
+									</div>
+
+	                                <!--<p><a href="/artist/home" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalDate" onclick="document.getElementById('updateform').submit();">Confirm</a></p>-->
+
+	                            </div>
+	                       
+	                             
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<% } %>
+
+	<%if (!chk) { %>
+	<!-- Login modal -->
+	<div class="modal fade" id="modalTerms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog width-400" role="document">
+	        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i></i></a>
+	            <div
+	                    class="modal-body no-p">
+	                <div class="text-center p-40 p-b-0">
+	                    <img src="/images/dummy/u4.png" alt="">
+	                    <h3>Welcome Back</h3>
+	                    <p class="p-t-b-20">Hey Soldier welcome back signin now there is lot of new stuff waiting
+	                        for you</p>
+	                </div>
+	                <div class="light p-40 b-t-b">
+	                    <form method="post" action="/users/login" id="lg">
+	                        <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                            <input name="email" type="email" class="form-control form-control-lg"
+	                                   placeholder="Email Address">
+	                        </div>
+	                        <div class="form-group has-icon"><i class="icon-user-secret"></i>
+	                            <input name="password" type="password" class="form-control form-control-lg"
+	                                   placeholder="Password">
+	                        </div>
+	                        <p><a href="" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalDate" onclick="document.getElementById('lg').submit();">Confirm</a></p>
+	                    </form>
+	                </div>
+	                <div class="p-40"><a href="#" class="btn btn-lg btn-block btn-social facebook">
+	                    <i class="icon-facebook"></i> Login with Facebook
+	                </a>
+	                    <a href="#" class="btn btn-lg btn-block btn-social twitter">
+
+	                        <i class="icon-twitter"></i> Login with Twitter
+
+	                    </a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<% } %>
+
+	<script src="/js/app.js"></script>
+	
 </body>
 </html>
