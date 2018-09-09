@@ -58,7 +58,7 @@
         </li>
 
         
-
+        <!--
         <li><a href="#modalLogin" data-toggle="modal" data-target="#modalLogin">
             Login
         </a>
@@ -85,7 +85,7 @@
         <li><a href="#modalSignUpArtist" class="btn btn-primary nav-btn" data-toggle="modal"
                data-target="#modalSignUpArtist">Artist Sign
             Up</a>
-        </li>
+        </li>-->
 
     </ul>
 </div>
@@ -96,27 +96,25 @@
 </div>
 
 <div>
-    <form action="/services/<%=category%>" method="Post">
+    <form action="/services/<%=category%>/filter" method="Get">
+        <label>city</label>
         <select name="city">
-            <option value="all" <% if(filter.city=="all")  {%>selected <% }%> >--</option>
-  <option value="Delhi" <% if(filter.city=="Delhi")  {%>selected <% }%>>Delhi</option>
-  <option value="Jaipur" <% if(filter.city=="Jaipur")  {%>selected <% }%>>Jaipur</option>
-  <option value="Banglore" <% if(filter.city=="Banglore")  {%>selected <% }%>>Banglore</option>
-  <option value="Mumbai" <% if(filter.city=="Mumbai")  {%>selected <% }%>>Mumbai</option>
-    </select>
-      <select name="namesort">
-        <option value=0 <% if(filter.namesort==0)  {%>selected <% }%>>--</option>
-        <option value=1 <% if(filter.namesort==1)  {%>selected <% }%>>A to Z</option>
-        <option value=-1 <% if(filter.namesort==-1)  {%>selected <% }%>>Z to A</option>
-      
-    </select>
-      <select name="ratingsort">
-        <option value=0 <% if(filter.ratingsort==0)  {%>selected <% }%>>--</option>
-        <option value=1 <% if(filter.ratingsort==1)  {%>selected <% }%>>low to high</option>
-        <option value=-1 <% if(filter.ratingsort==-1)  {%>selected <% }%>>high to low</option>
-      
-    </select>
-
+          <option value="all" <% if(filter.city=="all")  {%>selected <% }%> >--</option>
+          <option value="Delhi" <% if(filter.city=="Delhi")  {%>selected <% }%>>Delhi</option>
+          <option value="Jaipur" <% if(filter.city=="Jaipur")  {%>selected <% }%>>Jaipur</option>
+          <option value="Banglore" <% if(filter.city=="Banglore")  {%>selected <% }%>>Banglore</option>
+          <option value="Mumbai" <% if(filter.city=="Mumbai")  {%>selected <% }%>>Mumbai</option>
+        </select><br>
+        <label>name sort</label><br>
+        <input type="radio"  value=0 name="namesort"<% if(filter.namesort==0)  {%>checked <% }%>>no sort</option>
+        <input type="radio"  value=1 name="namesort"<% if(filter.namesort==1)  {%>checked <% }%>>A to Z</option>
+        <input type="radio"  value=-1 name="namesort"<% if(filter.namesort==-1)  {%>checked <% }%>>Z to A</option>
+        <br><label>rating sort</label><br>
+        <input type="radio"  value=0 name="ratingsort"<% if(filter.ratingsort==0)  {%>checked <% }%>>no sort</option>
+        <input type="radio"  value=1 name="ratingsort"<% if(filter.ratingsort==1)  {%>checked <% }%>>low to high</option>
+        <input type="radio"  value=-1 name="ratingsort"<% if(filter.ratingsort==-1)  {%>checked <% }%>>high to low</option>
+     
+        <br>
       <input type="submit" name="">
 
         
@@ -137,9 +135,19 @@
                             <% for(var i=0; i < artist.length; i++) { %>
                             <div class="col-md-4">
                                 <div class="paper-block text-center">
-                                    <img class="p-b-20" src="/uploads/<%= artist[i].photo %>" alt="<%= artist[i].name %>"/>
-                                <h3>                                  
-                                    <a href="/artists/<%= artist[i]._id %>"><%= artist[i].name %></a>
+                                    <img src="/uploads/<%= artist[i].photo %>" alt="<%= artist[i].name %>" style="border: 1px solid #ddd;
+                                    border-radius: 50%;
+                                    padding: 3px;
+                                    width: 150px;
+                                    height: 150px;"/>
+                                <h3> 
+                                <% if(category=="event manager") {%>                                 
+                                    <a href="/emanagers/<%= artist[i]._id %>"><%= artist[i].name %></a>
+                                    <% } %>
+
+                                    <% if(category!="event manager") {%>                                 
+                                        <a href="/artists/<%= artist[i]._id %>"><%= artist[i].name %></a>
+                                        <% } %>
                                 </h3>
                                 <p><%= artist[i].city %></p>
                                 <p><%= artist[i].small_description %></p>
@@ -218,206 +226,7 @@
 </footer>
 
 
-<!-- Login modal -->
-<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog width-400" role="document">
-        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
-                                            class="paper-nav-toggle active"><i></i></a>
-            <div
-                    class="modal-body no-p">
-                <div class="text-center p-40 p-b-0">
-                    <img src="/images/dummy/u4.png" alt="">
-                    <h3>Welcome Back</h3>
-                    <p class="p-t-b-20">Hey Soldier welcome back signin now there is lot of new stuff waiting
-                        for you</p>
-                </div>
-                <div class="light p-40 b-t-b">
-                    <form method="post" action="/users/login">
-                        <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                            <input name="email" type="email" class="form-control form-control-lg"
-                                   placeholder="Email Address">
-                        </div>
-                        <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                            <input name="password" type="password" class="form-control form-control-lg"
-                                   placeholder="Password">
-                        </div>
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Log In">
-                    </form>
-                </div>
-                <div class="p-40"><a href="#" class="btn btn-lg btn-block btn-social facebook">
-                    <i class="icon-facebook"></i> Login with Facebook
-                </a>
-                    <a href="#" class="btn btn-lg btn-block btn-social twitter">
 
-                        <i class="icon-twitter"></i> Login with Twitter
-
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- SignUp modal -->
-<div class="modal fade" id="modalSignUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
-                                            class="paper-nav-toggle active"><i></i></a>
-            <div
-                    class="modal-body no-p">
-                <div class="row">
-                    <div class="col-lg-5 grid">
-                        <div class="p-40">
-                            <h5 class="p-t-40">Sign Up Using Social Account</h5>
-                            <p class="p-t-b-20">Hey Soldier welcome back signin now there is lot of new stuff waiting
-                                for you</p> <a href="#" class="btn btn-lg btn-block btn-social facebook">
-                            <i class="icon-facebook"></i> Login with Facebook
-                        </a>
-                            <a href="#" class="btn btn-lg btn-block btn-social twitter">
-
-                                <i class="icon-twitter"></i> Login with Twitter
-
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="light p-t-b-40">
-                            <div class="p-40">
-                                <h5 class="p-b-20">Create New User Account</h5>
-                                <form method="post" action="/users/register" enctype="multipart/form-data">
-                                    <div class="form-group has-icon"><i class="icon-user-circle"></i>
-                                        <input name="name" type="text" class="form-control form-control-lg"
-                                               placeholder="Your Name*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="email" type="email" class="form-control form-control-lg"
-                                               placeholder="Email Address*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                                        <input name="password" type="password" class="form-control form-control-lg"
-                                               placeholder="Password*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                                        <input type="file" name="profileimage">
-                                        <!--<input name="aimage" type="file" class="form-control form-control-lg" required>-->
-                                    </div>
-                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Sign Up Now">
-                                    <p class="forget-pass">A verification email wil be sent to you</p>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!-- Artist SignUp modal -->
-<div class="modal fade" id="modalSignUpArtist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
-                                            class="paper-nav-toggle active"><i></i></a>
-            <div
-                    class="modal-body no-p">
-                <div class="row">
-                    <div class="col-lg-5 grid">
-                        <div class="p-40">
-                            <h5 class="p-t-40">Sign Up Using Social Account</h5>
-                            <p class="p-t-b-20">Hey Soldier welcome back signin now there is lot of new stuff waiting
-                                for you</p> <a href="#" class="btn btn-lg btn-block btn-social facebook">
-                            <i class="icon-facebook"></i> Login with Facebook
-                        </a>
-                            <a href="#" class="btn btn-lg btn-block btn-social twitter">
-
-                                <i class="icon-twitter"></i> Login with Twitter
-
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="light p-t-b-40">
-                            <div class="p-40">
-                                <h5 class="p-b-20">Create New Artist Account</h5>
-                                <form method="post" action="/artists/registerartist">
-                                    <div class="form-group has-icon"><i class="icon-user-circle"></i>
-                                        <input name="name" type="text" class="form-control form-control-lg"
-                                               placeholder="Your Name*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="email" type="email" class="form-control form-control-lg"
-                                               placeholder="Email Address*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="phone" type="tel" class="form-control form-control-lg"
-                                               placeholder="Phone Number*" required>
-                                    </div>
-                                    <div >
-                                        <select name="gender" class="form-control form-control-lg">
-                                          <option value="Gender" selected="selected">Gender</option>
-                                          <option value="Male">Male</option>
-                                          <option value="Female">Female</option>
-                                        </select><br>
-                                        
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="age" type="text" class="form-control form-control-lg"
-                                               placeholder="Age">
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="address" type="text" class="form-control form-control-lg"
-                                               placeholder="Street Address*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="city" type="text" class="form-control form-control-lg"
-                                               placeholder="City*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="state" type="text" class="form-control form-control-lg"
-                                               placeholder="State*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="pin" type="text" class="form-control form-control-lg"
-                                               placeholder="Pin Code*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="qualification" type="text" class="form-control form-control-lg"
-                                               placeholder="Qualification">
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="specialization" type="text" class="form-control form-control-lg"
-                                               placeholder="Specialization">
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="bio" type="text" class="form-control form-control-lg"
-                                               placeholder="Brief Bio">
-                                        
-                                        <!--<textarea name="bio" placeholder="Bio" style="width: 100%"></textarea><br>-->
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="catagory" type="text" class="form-control form-control-lg"
-                                               placeholder="Choose Catagory*" required>
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
-                                        <input name="link" type="text" class="form-control form-control-lg"
-                                               placeholder="Your Website Link">
-                                    </div>
-                                    <div class="form-group has-icon"><i class="icon-user-secret"></i>
-                                        <input name="password" type="password" class="form-control form-control-lg"
-                                               placeholder="Password*" required>
-                                    </div>
-                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Sign Up Now">
-                                    <p class="forget-pass">A verification email wil be sent to you</p>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

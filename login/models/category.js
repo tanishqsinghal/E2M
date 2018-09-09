@@ -14,6 +14,12 @@ var CategorySchema = mongoose.Schema({
 
 var Category = module.exports = mongoose.model('category', CategorySchema,'category');
 
-module.exports.getCategory = function( callback){
+module.exports.getCategory = function(callback){
 	Category.find({}).select({category:1,tags:1,_id:0}).exec(callback);
+}
+
+
+module.exports.getCategories = function( callback){
+	var query = {};
+	Category.find(query, callback);
 }

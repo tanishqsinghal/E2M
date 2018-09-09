@@ -12,12 +12,14 @@ var expressValidator = require('express-validator');
 var localStrategy = require('passport-local').Strategy;
 var multer = require('multer');
 //var upload = multer({dest: './uploads'});
-var flash = require('connect-flash');
+var flash = require('req-flash');
 var bcrypt = require('bcryptjs');
 var mongo = require('mongodb');
 var ejs = require('ejs');
 var mongoose = require('mongoose');
 var db = mongoose.connection;
+
+var tagsInput = require('tags-input');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -25,6 +27,9 @@ var artistsRouter = require('./routes/artists');
 var searchRouter = require('./routes/scrh');
 var serviceRouter = require('./routes/services');
 var testRouter = require('./routes/test');
+var emanagerRouter = require('./routes/emanagers');
+var instituteRouter = require('./routes/institutes');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -49,6 +54,11 @@ app.use(session({
 	resave: true
 }));
 
+app.use(flash());
+
+
+
+
 //Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -70,7 +80,7 @@ app.use(expressValidator({
 	}
 }));
 
-app.use(require('connect-flash')());
+
 app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
@@ -87,6 +97,9 @@ app.use('/artists', artistsRouter);
 app.use('/scrh', searchRouter);
 app.use('/services', serviceRouter);
 app.use('/test', testRouter);
+app.use('/emanagers', emanagerRouter);
+app.use('/institutes', instituteRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

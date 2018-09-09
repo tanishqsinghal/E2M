@@ -24,8 +24,12 @@ var ArtistSchema = mongoose.Schema({
 	pin:Number,
 	website_link:String,
 	photo:String,
+	instid: String,
+	instname: String,
 	active: Boolean,
-	rand: Number
+	count:Number,
+	rand: Number,
+	photos: Array
 });
 
 var Artist = module.exports = mongoose.model('artists', ArtistSchema, 'artists');
@@ -76,4 +80,20 @@ module.exports.updateArtist=function(artist,callback){
 
 	
 	artist.save(callback);
+}
+
+module.exports.resetPass=function(artist,callback){
+	bcrypt.genSalt(10, function(err, salt) {
+	    bcrypt.hash(artist.password, salt, function(err, hash) {
+	        artist.password = hash;
+	        
+
+	        artist.save(callback);
+	   });   
+	});
+}
+
+module.exports.getArtist = function( callback){
+	var query = {};
+	Artist.find(query, callback);
 }

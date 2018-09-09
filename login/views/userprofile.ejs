@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Evert is the best platform to find and hire artists.">
+    <meta name="author" content="Tanishq Singhal">
+    <title><%= user.name %></title>
+    <link rel="stylesheet" href="/stylesheets/autocomplete.css">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/animate.min.css" rel="stylesheet"> 
+    <link href="/stylesheets/lightbox.css" rel="stylesheet"> 
+    <link href="/stylesheets/main.css" rel="stylesheet">
+    <link href="/stylesheets/responsive.css" rel="stylesheet">
+
+
+    <!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+	<link rel="stylesheet" href="/stylesheets/flaticon.css"/>
+	<link rel="stylesheet" href="/stylesheets/owl.carousel.css"/>
+	<link rel="stylesheet" href="/stylesheets/magnific-popup.css"/>
+	<link rel="stylesheet" href="/stylesheets/stylepro.css"/>
+    
+
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+
+
+	<div id="tab-container">
+                
+                    
+                    
+                        <ul id="tab1" class="nav nav-tabs">
+                            <li class="active"><a href="#tab1-item1" data-toggle="tab">Profile</a></li>
+                            <li><a href="#tab1-item7" data-toggle="tab">Notification</a></li>
+                            <li><a href="#tab1-item5" data-toggle="tab">Request Pending</a></li>
+                            <li><a href="#tab1-item2" data-toggle="tab">Ongoing Work</a></li>
+                            <li><a href="#tab1-item3" data-toggle="tab">Pending Reviews and Ratings</a></li>
+                            <li><a href="#tab1-item4" data-toggle="tab">Finished Work</a></li>
+                            
+                            <li><a href="#tab1-item6" data-toggle="tab">Logout</a></li>
+                            <li><a href="/users/home" >Home</a></li>
+
+                        </ul>
+                        <div class="tab-content">
+                        	<div class="tab-pane fade active in" id="tab1-item1">
+                        		<!-- Hero section start -->
+								<section class="hero-section spad">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-xl-10 offset-xl-1">
+												
+														<div class="hero-text">
+															<h2><%= user.name %></h2>
+															
+														</div>
+														<div class="hero-info">
+															<h2>General Info</h2>
+															<ul>
+																<li><span>E-mail</span><%= user.email %></li>
+																<li><span>Phone </span><%= user.phone %></li>
+																
+																<li><span>Gender</span><%= user.gender %></li>
+																<li><span>Age</span><%= user.age %></li>
+
+																<li><span>Address</span><%= user.address %></li>
+																
+																<li><span>State</span><%= user.state %></li>
+																<li><span>Pin</span><%= user.pin %></li>
+																
+																
+																<li><a href="#updateProfile" class="btn btn-primary nav-btn" data-toggle="modal"
+							               data-target="#updateProfile">Update Profile</a></li>
+															</ul>
+														</div>
+													
+											</div>
+										</div>
+									</div>
+								</section>
+								<!-- Hero section end -->
+                   						
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item2">
+                                <ul>
+									<% for(var i=0; i < event.length; i++) { %>
+										<% if(event[i].status=="active") { %>
+									   		
+									   		<table border="1px">
+									   			<tbody>
+									   				<%if(event[i].artist_category!="event manager") {%>
+									   				<tr>
+									   					<td>artist name</td>
+									   					<td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %></a></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist gender</td>
+									   					<td><%= event[i].artist_gender %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist phone</td>
+									   					<td><%= event[i].artist_phone %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist email</td>
+									   					<td><%= event[i].artist_email %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist category</td>
+									   					<td><%= event[i].artist_category %></td>
+									   				</tr>
+									   				<%}%>
+									   				<% if(event[i].artist_category=="event manager") {%>
+									   				<tr>
+									   					<td>event manager name</td>
+									   					<td><a href="/emanagers/<%= event[i].emanager_id %>"><%= event[i].emanager_name %></a></td>
+									   				</tr>
+									   				<tr>
+									   					<td> gender</td>
+									   					<td><%= event[i].emanager_gender %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>phone</td>
+									   					<td><%= event[i].emanager_phone %></td>
+									   				</tr>
+									   				<tr>
+									   					<td> email</td>
+									   					<td><%= event[i].emanager_email %></td>
+									   				</tr>
+									   				<%}%>	
+									   				<tr>
+									   					<td>start date</td>
+									   					<td><%= event[i].start_date %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>end date</td>
+									   					<td><%= event[i].end_date %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>other details</td>
+									   					<td><%= event[i].details %></td>
+									   				</tr>
+									   			</tbody>
+									   		</table>
+									   	   <div id="filter">
+									   	<form id="cancelForm" action="/users/finishReview" method="post">
+									   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+									   	   <input type="submit" class="btn btn-warning" value="End" name="finish">
+									   	</form>
+									   <div>
+									  <% } %>   
+									<% } %>
+								</ul>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item3">
+                                <ul>
+									<% for(var i=0; i < event.length; i++) { %>
+										<% if(event[i].status=="review") { %>
+									   
+									   		<table border="1px">
+									   			<tbody>
+									   				<%if(event[i].artist_category!="event manager") {%>
+									   				<tr>
+									   					<td>artist name</td>
+									   					<td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %></a></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist gender</td>
+									   					<td><%= event[i].artist_gender %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist phone</td>
+									   					<td><%= event[i].artist_phone %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist email</td>
+									   					<td><%= event[i].artist_email %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist category</td>
+									   					<td><%= event[i].artist_category %></td>
+									   				</tr>
+									   				<%}%>
+									   				<% if(event[i].artist_category=="event manager") {%>
+									   				<tr>
+									   					<td>event manager name</td>
+									   					<td><a href="/emanagers/<%= event[i].emanager_id %>"><%= event[i].emanager_name %></a></td>
+									   				</tr>
+									   				<tr>
+									   					<td> gender</td>
+									   					<td><%= event[i].emanager_gender %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>phone</td>
+									   					<td><%= event[i].emanager_phone %></td>
+									   				</tr>
+									   				<tr>
+									   					<td> email</td>
+									   					<td><%= event[i].emanager_email %></td>
+									   				</tr>
+									   				<%}%>
+									   					<td>start date</td>
+									   					<td><%= event[i].start_date %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>end date</td>
+									   					<td><%= event[i].end_date %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>other details</td>
+									   					<td><%= event[i].details %></td>
+									   				</tr>
+									   			</tbody>
+									   		</table>
+									   	   <div id="filter">
+									   	<form id="cancelForm" action="/users/review" method="post">
+									   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+									   	    <input type="text" name="review">
+									   	    <input type="number" name="rating">
+									   	   <input type="submit" value="submit"  class="btn btn-primary" name="submit">
+									   	</form>
+									   <div>
+									  <% } %>   
+									<% } %>
+								</ul>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item4">
+                                <ul>
+									<% for(var i=0; i < event.length; i++) { %>
+										<% if(event[i].active==false) { %>
+
+									   		<table border="1px">
+									   			<tbody>
+									   			<%if(event[i].artist_category!="event manager") {%>
+									   				<tr>
+									   					<td>artist name</td>
+									   					<td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %></a></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist gender</td>
+									   					<td><%= event[i].artist_gender %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist phone</td>
+									   					<td><%= event[i].artist_phone %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist email</td>
+									   					<td><%= event[i].artist_email %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist category</td>
+									   					<td><%= event[i].artist_category %></td>
+									   				</tr>
+									   				<%}%>
+									   				<% if(event[i].artist_category=="event manager") {%>
+									   				<tr>
+									   					<td>event manager name</td>
+									   					<td><a href="/emanagers/<%= event[i].emanager_id %>"><%= event[i].emanager_name %></a></td>
+									   				</tr>
+									   				<tr>
+									   					<td> gender</td>
+									   					<td><%= event[i].emanager_gender %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>phone</td>
+									   					<td><%= event[i].emanager_phone %></td>
+									   				</tr>
+									   				<tr>
+									   					<td> email</td>
+									   					<td><%= event[i].emanager_email %></td>
+									   				</tr>
+									   				<%}%>
+									   				<tr>
+									   					<td>start date</td>
+									   					<td><%= event[i].start_date %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>end date</td>
+									   					<td><%= event[i].end_date %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>other details</td>
+									   					<td><%= event[i].details %></td>
+									   				</tr>
+									   			</tbody>
+									   		</table>
+									   	   <div id="filter">
+
+									   <div>
+									  <% } %>   
+									<% } %>
+								</ul>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item5">
+                            	
+								<ul>
+									<% for(var i=0; i < event.length; i++) { %>
+										<% if(event[i].status=="request") { %>
+									   
+											<table border="1px">
+												<tbody>
+													<%if(event[i].artist_category!="event manager") {%>
+									   				<tr>
+									   					<td>artist name</td>
+									   					<td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %></a></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist gender</td>
+									   					<td><%= event[i].artist_gender %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist phone</td>
+									   					<td><%= event[i].artist_phone %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist email</td>
+									   					<td><%= event[i].artist_email %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>artist category</td>
+									   					<td><%= event[i].artist_category %></td>
+									   				</tr>
+									   				<%}%>
+									   				<% if(event[i].artist_category=="event manager") {%>
+									   				<tr>
+									   					<td>event manager name</td>
+									   					<td><a href="/emanagers/<%= event[i].emanager_id %>"><%= event[i].emanager_name %></a></td>
+									   				</tr>
+									   				<tr>
+									   					<td> gender</td>
+									   					<td><%= event[i].emanager_gender %></td>
+									   				</tr>
+									   				<tr>
+									   					<td>phone</td>
+									   					<td><%= event[i].emanager_phone %></td>
+									   				</tr>
+									   				<tr>
+									   					<td> email</td>
+									   					<td><%= event[i].emanager_email %></td>
+									   				</tr>
+									   				<%}%>
+													<tr>
+														<td>start date</td>
+														<td><%= event[i].start_date %></td>
+													</tr>
+													<tr>
+														<td>end date</td>
+														<td><%= event[i].end_date %></td>
+													</tr>
+													<tr>
+														<td>other details</td>
+														<td><%= event[i].details %></td>
+													</tr>
+												</tbody>
+											</table>
+									   	   <div id="filter">
+									   	<form id="cancelForm" action="/users/finishEvent" method="post">
+									   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+									   	   <input type="submit" class="btn btn-warning" value="End" name="finish">
+									   	</form>
+									   <div>
+									  <% } %>   
+									<% } %>
+								</ul>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item7">
+                            	<div>
+									<h5>Unread Notification </h5>
+									<ul>
+										<% for(var i=0; i < notification.length; i++) { %>
+												<% if(!notification[i].isread) { %>
+											<li><a href="<%= notification[i].href %>"><%= notification[i].message %></a></li>
+											<% } %>
+										<% } %>			
+									</ul>
+									<h5>Read Notification</h5>
+									<ul>
+										<% for(var i=0; i < notification.length; i++) { %>
+												<% if(notification[i].isread) { %>
+											<li><a href="<%= notification[i].href %>"><%= notification[i].message %></a></li>
+											<% } %>
+										<% } %>			
+									</ul>
+								</div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item6">
+                                <a href="/users/logout" class="btn btn-warning">Confirm Logout</a>
+                            </div>
+                        </div>
+                    
+    </div><!--/#table-container-->
+
+
+
+    <!-- Update Profile-->
+	<div class="modal fade" id="updateProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document" >
+	        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i></i></a>
+	            <div class="modal-body no-p">
+	                
+	                        
+	                            <div class="p-40" id="dt" >
+	                                <h5 class="p-b-20">Enter Your Details</h5>
+	                              	
+	                                
+
+									<form method="post" action="/users/updateuserprofie" id="updateform">	                                    
+										<div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="phone" type="tel" class="form-control form-control-lg" value="<%= user.phone %>" 
+	                                               placeholder="Phone Number*" required>
+	                                    </div>
+	                                    <div >
+	                                    	<select name="gender" class="form-control form-control-lg">
+	                                          <option value="Male" selected="selected">Male</option>
+											  <option value="Female">Female</option>
+											</select><br>
+	                                        
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="age" type="text" class="form-control form-control-lg" value="<%= user.age %>"
+	                                               placeholder="Age" required>
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="address" type="text" class="form-control form-control-lg" value="<%= user.address %>"
+	                                               placeholder="Street Address*" required>
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="city" type="text" class="form-control form-control-lg" value="<%= user.city %>"
+	                                               placeholder="City*" required>
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="state" type="text" class="form-control form-control-lg" value="<%= user.state %>"
+	                                               placeholder="State*" required>
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="pin" type="text" class="form-control form-control-lg" value="<%= user.pin %>"
+	                                               placeholder="Pin Code*" required>
+	                                    </div>
+	                                    <input type="submit" class="btn btn-primary nav-btn" name="submit">
+
+	                                
+											
+
+										</form>
+	                             	         
+	                                    
+	                                    
+	                                
+	                            </div>
+	                       
+	                    
+	                
+	            </div>
+	        </div>
+	    </div>   
+	</div>
+
+
+	
+<!--<table border="1px">
+		<caption>user Profile</caption>
+		<thead>
+			<tr>
+				<th>Field</th>
+				<th>Result</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Name</td>
+				<td><%= user.name %></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><%= user.email %></td>
+			</tr>
+			<tr>
+				<td>Phone</td>
+				<td><%= user.phone %></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td><%= user.gender %></td>
+			</tr>
+			<tr>
+				<td>Age</td>
+				<td><%= user.age %></td>
+			</tr>
+			<tr>
+				<td>City</td>
+				<td><%= user.city %></td>
+			</tr>
+			<tr>
+				<td>Pin</td>
+				<td><%= user.pin %></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	
+
+
+	<div>
+		<p>Finished work</p>
+		<ul>
+			<% for(var i=0; i < event.length; i++) { %>
+				<% if(event[i].active==false) { %>
+
+			   		<table border="1px">
+			   			<tbody>
+			   				<tr>
+			   					<td>artist name</td>
+			   					<td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %></a></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist gender</td>
+			   					<td><%= event[i].artist_gender %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist phone</td>
+			   					<td><%= event[i].artist_phone %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist email</td>
+			   					<td><%= event[i].artist_email %></td>
+			   				</tr>
+			   				
+			   				<tr>
+			   					<td>start date</td>
+			   					<td><%= event[i].start_date %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>end date</td>
+			   					<td><%= event[i].end_date %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>other details</td>
+			   					<td><%= event[i].details %></td>
+			   				</tr>
+			   			</tbody>
+			   		</table>
+			   	   <div id="filter">
+
+			   <div>
+			  <% } %>   
+			<% } %>
+		</ul>
+	</div>
+
+	<div>
+		<p>Current Work</p>
+		<ul>
+			<% for(var i=0; i < event.length; i++) { %>
+				<% if(event[i].status=="active") { %>
+			   
+			   		<table border="1px">
+			   			<tbody>
+			   				<tr>
+			   					<td>artist name</td>
+			   					<td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %></a></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist gender</td>
+			   					<td><%= event[i].artist_gender %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist phone</td>
+			   					<td><%= event[i].artist_phone %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist email</td>
+			   					<td><%= event[i].artist_email %></td>
+			   				</tr>
+			   				
+			   				<tr>
+			   					<td>start date</td>
+			   					<td><%= event[i].start_date %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>end date</td>
+			   					<td><%= event[i].end_date %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>other details</td>
+			   					<td><%= event[i].details %></td>
+			   				</tr>
+			   			</tbody>
+			   		</table>
+			   	   <div id="filter">
+			   	<form id="cancelForm" action="/users/finishReview" method="post">
+			   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+			   	   <input type="submit" value="End" name="finish">
+			   	</form>
+			   <div>
+			  <% } %>   
+			<% } %>
+		</ul>
+	</div>
+		<div>
+		<p>Pending Reviews and ratings</p>
+		<ul>
+			<% for(var i=0; i < event.length; i++) { %>
+				<% if(event[i].status=="review") { %>
+			   
+			   		<table border="1px">
+			   			<tbody>
+			   				<tr>
+			   					<td>artist name</td>
+			   					<td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %></a></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist gender</td>
+			   					<td><%= event[i].artist_gender %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist phone</td>
+			   					<td><%= event[i].artist_phone %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>artist email</td>
+			   					<td><%= event[i].artist_email %></td>
+			   				</tr>
+			   				
+			   				<tr>
+			   					<td>start date</td>
+			   					<td><%= event[i].start_date %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>end date</td>
+			   					<td><%= event[i].end_date %></td>
+			   				</tr>
+			   				<tr>
+			   					<td>other details</td>
+			   					<td><%= event[i].details %></td>
+			   				</tr>
+			   			</tbody>
+			   		</table>
+			   	   <div id="filter">
+			   	<form id="cancelForm" action="/users/review" method="post">
+			   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+			   	    <input type="text" name="review">
+			   	    <input type="number" name="rating">
+			   	   <input type="submit" value="submit" name="submit">
+			   	</form>
+			   <div>
+			  <% } %>   
+			<% } %>
+		</ul>
+	</div>
+	<div>
+		<p>Requests Pending</p>
+		<ul>
+			<% for(var i=0; i < event.length; i++) { %>
+				<% if(event[i].status=="request") { %>
+			   
+					<table border="1px">
+						<tbody>
+							<tr>
+								<td>artist name</td>
+								<td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %></a></td>
+							</tr>
+							<tr>
+								<td>artist gender</td>
+								<td><%= event[i].artist_gender %></td>
+							</tr>
+							<tr>
+								<td>artist phone</td>
+								<td><%= event[i].artist_phone %></td>
+							</tr>
+							<tr>
+								<td>artist email</td>
+								<td><%= event[i].artist_email %></td>
+							</tr>
+							
+							<tr>
+								<td>start date</td>
+								<td><%= event[i].start_date %></td>
+							</tr>
+							<tr>
+								<td>end date</td>
+								<td><%= event[i].end_date %></td>
+							</tr>
+							<tr>
+								<td>other details</td>
+								<td><%= event[i].details %></td>
+							</tr>
+						</tbody>
+					</table>
+			   	   <div id="filter">
+			   	<form id="cancelForm" action="/users/finishEvent" method="post">
+			   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+			   	   <input type="submit" value="End" name="finish">
+			   	</form>
+			   <div>
+			  <% } %>   
+			<% } %>
+		</ul>
+	</div>-->
+	
+
+	
+
+
+	
+
+    
+	<script src="/js/app.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/wow.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script> 
+
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/circle-progress.min.js"></script>
+	<script src="/js/mainpro.js"></script>
+</body>
+</html>

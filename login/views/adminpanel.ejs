@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Panel</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Evert is the best platform to find and hire artists.">
+    <meta name="author" content="Tanishq Singhal">
+    <link rel="stylesheet" href="/stylesheets/autocomplete.css">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/animate.min.css" rel="stylesheet"> 
+    <link href="/stylesheets/lightbox.css" rel="stylesheet"> 
+    <link href="/stylesheets/main.css" rel="stylesheet">
+    <link href="/stylesheets/responsive.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
+    <!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+	<link rel="stylesheet" href="/stylesheets/flaticon.css"/>
+	<link rel="stylesheet" href="/stylesheets/owl.carousel.css"/>
+	<link rel="stylesheet" href="/stylesheets/magnific-popup.css"/>
+	<link rel="stylesheet" href="/stylesheets/stylepro.css"/>
+    
+
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<body>
+
+	<div id="tab-container" ng-app="tab-app" ng-controller="tab-control">
+                
+                    
+                    
+                        <ul id="tab1" class="nav nav-tabs">
+                            <li class="active"><a href="#tab1-item1" data-toggle="tab">Artists</a></li>
+                            <li><a href="#tab1-item2" ng-click="get_categories()" data-toggle="tab">Categories</a></li>
+                            <li><a href="#tab1-item3" ng-click="get_emanagers()" data-toggle="tab">Emanagers</a></li>
+                            <li><a href="#tab1-item4" ng-click="get_institutes()" data-toggle="tab">Institutes</a></li>
+                            <li><a href="#tab1-item5" ng-click="get_users()" data-toggle="tab">Users</a></li>
+                            <li><a href="#modalInstitute" data-toggle="modal">Add Institute</a></li>
+                            <li><a href="#tab1-item6" data-toggle="tab">Logout</a></li>
+                            
+                        </ul>
+
+
+                        <div class="tab-content">
+                        	<div class="tab-pane fade active in" id="tab1-item1">
+                        		<p>Total Artists : <%= artists.length%></p>
+                        		<% for(var i=0; i < artists.length; i++) { %>
+                        			<table border="2px">
+                        				<thead>
+                        					<tr>
+                        						<th><%= artists[i].name%></th>
+                        					</tr>
+                        				</thead>
+                        				<tbody>
+                        					<tr>
+                        						<td><%= artists[i] %></td>
+                        					</tr>
+                        				</tbody>
+                        			</table>
+                        		<% } %>
+                        	</div>
+                        	<div class="tab-pane fade" id="tab1-item2">
+                        		<button ng-click="categorysort('category')">Sort</button>
+                        		<div id="category">
+	                        			<table border="2px" class="catsortable" ng-repeat="x in categories">
+	                        				<thead>
+	                        					<tr>
+	                        						<th class="catname">{{x.category}}</th>
+	                        					</tr>
+	                        				</thead>
+	                        				<tbody>
+	                        					<tr>
+	                        						<td>{{x.tags}}</td>
+	                        					</tr>
+	                        				</tbody>
+	                        			</table>
+                        		</div>
+                        	</div>
+                        	<div class="tab-pane fade" id="tab1-item3">
+                        			<table border="2px" ng-repeat="x in emanagers">
+                        				<thead>
+                        					<tr>
+                        						<th>{{x.name}}</th>
+                        					</tr>
+                        				</thead>
+                        				<tbody>
+                        					<tr>
+                        						<td>{{x}}</td>
+                        					</tr>
+                        				</tbody>
+                        			</table>
+                        
+                        	</div>
+                        	<div class="tab-pane fade" id="tab1-item4">
+								<button ng-click="institutesortname()">Name</button>
+								<button ng-click="institutesortcity()">City</button>
+								
+                        		<div id="institute">
+	                        			<table border="2px" class="instsortable" style=" margin-bottom: 10px;" cellspacing="5" ng-repeat="x in institutes">
+	             
+	                        				<tbody>
+	                        					
+	                        					<tr>
+	                        						<td>Institute Name</td>
+	                        						<td  class="instname">{{x.name}}</td>	
+	                        					</tr>
+	                        					<tr>
+	                        						<td>Institute City</td>
+	                        						<td class="instcity">{{x.city}}</td>
+	                        					</tr>
+	                        					<tr>
+	                        						<td>Institute State</td>
+	                        						<td>{{x.state}}</td>
+	                        					</tr>
+	                        					<tr>
+	                        						<td>Institute Description</td>
+	                        						<td>{{x.small_description}}</td>
+	                        					</tr>
+	                        					<tr>
+	                        						<td>Institute Pin</td>
+	                        						<td>{{x.pin }}</td>
+	                        					</tr>
+	                        					<tr>
+	                        						<td>Institute Website</td>
+	                        						<td>{{x.website_link}}</td>
+	                        					</tr>
+	                        				</tbody>
+	                        			</table>
+                        		</div>
+                        	</div>
+                        	<div class="tab-pane fade" id="tab1-item5">
+             
+                        			<table border="2px" ng-repeat="x in users">
+                        				<thead>
+                        					<tr>
+                        						<th>{{x.name}}</th>
+                        					</tr>
+                        				</thead>
+                        				<tbody>
+                        					<tr>
+                        						<td>{{x}}</td>
+                        					</tr>
+                        				</tbody>
+                        			</table>
+                        	</div>
+                        	<div class="tab-pane fade" id="tab1-item6">
+                        		<a href="/admin/logout" class="btn btn-warning">Confirm Logout</a>
+                        	</div>
+                        </div>
+    </div>
+
+    <!-- Add Institute Page-->
+	<div class="modal fade" id="modalInstitute" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content no-r ">
+	            <div class="modal-body no-p">
+	                <a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i>X</i></a>
+	                        
+	                            <div class="p-40">
+	                                
+	                                <form method="post" action="/institutes/addinstitute">
+	                                    <div class="form-group has-icon"><i class="icon-user-circle"></i>
+	                                        <input name="name" type="text" class="form-control form-control-lg"
+	                                               placeholder="Institute Name">
+	                                    </div>
+	                                    
+	                                    
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="address" type="text" class="form-control form-control-lg"
+	                                               placeholder="Street Address">
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="city" type="text" class="form-control form-control-lg"
+	                                               placeholder="City">
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="state" type="text" class="form-control form-control-lg"
+	                                               placeholder="State">
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="pin" type="text" class="form-control form-control-lg"
+	                                               placeholder="Pin Code">
+	                                    </div>
+	                                    
+	                                    
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                    	<input name="bio" type="text" class="form-control form-control-lg"
+	                                               placeholder="Small Description">
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="link" type="text" class="form-control form-control-lg"
+	                                               placeholder="Institute Website Link">
+	                                    </div>
+	                                    
+	                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit">
+	                                </form>
+	                            </div>
+	                       
+	                             
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+
+    <script src="/js/app.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/wow.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script> 
+
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/circle-progress.min.js"></script>
+	<script src="/js/mainpro.js"></script>
+	<script>
+	var app = angular.module('tab-app', []);
+	app.controller('tab-control', function($scope,$http) {
+		$scope.categorysort= function(){
+			$scope.categories.sort(function(a, b) {
+				console.log(a);
+				console.log(b);
+			    return a.category>b.category;
+			});
+		}
+		$scope.institutesortname= function(){
+			$scope.institutes.sort(function(a, b) {
+				var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+				 var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+				 if (nameA < nameB) {
+				   return -1;
+				 }
+				 if (nameA > nameB) {
+				   return 1;
+				 }
+
+				 // names must be equal
+				 return 0;
+			});
+		}
+		$scope.institutesortcity= function(){
+			$scope.institutes.sort(function(a, b) {
+				var cityA = a.city.toUpperCase(); // ignore upper and lowercase
+				 var cityB = b.city.toUpperCase(); // ignore upper and lowercase
+				 if (cityA < cityB) {
+				   return -1;
+				 }
+				 if (cityA > cityB) {
+				   return 1;
+				 }
+
+				 // names must be equal
+				 return 0;
+			});
+		}
+	   $scope.get_categories=function(){
+	  		$http.get("/admin/categories")
+	  		.then(function(response) {
+	      		$scope.categories = response.data.categories;
+	  		});
+	  }
+	   $scope.get_users=function(){
+	  		$http.get("/admin/users")
+	  		.then(function(response) {
+	      		$scope.users = response.data.users;
+	  		});
+	  }
+	   $scope.get_emanagers=function(){
+	  		$http.get("/admin/emanagers")
+	  		.then(function(response) {
+	  			$scope.emanagers = response.data.emanagers;
+	  		});
+	  }
+	   $scope.get_institutes=function(){
+	  		$http.get("/admin/institutes")
+	  		.then(function(response) {
+	  			$scope.institutes = response.data.institutes;
+	  		});
+	  }
+	});
+	</script>
+
+
+</body>
+</html>

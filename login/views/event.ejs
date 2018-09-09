@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Evert is the best platform to find and hire artists.">
+    <meta name="author" content="Tanishq Singhal">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <title>Event</title>
+    <link rel="stylesheet" href="/stylesheets/autocomplete.css">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/animate.min.css" rel="stylesheet"> 
+    <link href="/stylesheets/lightbox.css" rel="stylesheet"> 
+    <link href="/stylesheets/main.css" rel="stylesheet">
+    <link href="/stylesheets/responsive.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+  <link rel="stylesheet" href="/stylesheets/autocomplete.css">
+
+
+    <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/flaticon.css"/>
+  <link rel="stylesheet" href="/stylesheets/owl.carousel.css"/>
+  <link rel="stylesheet" href="/stylesheets/magnific-popup.css"/>
+  <link rel="stylesheet" href="/stylesheets/stylepro.css"/>
+    
+
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+
+
+  <div id="tab-container">
+                
+                    
+                    
+                        <ul id="tab1" class="nav nav-tabs">
+                            <li class="active"><a href="#tab1-item1" data-toggle="tab">Add Artist</a></li>
+                            <li><a href="#tab1-item2" data-toggle="tab">Current Event</a></li>
+                            <li><a href="#tab1-item3" data-toggle="tab">Finished work</a></li>
+                            <li><a href="#tab1-item4" data-toggle="tab">Current Work</a></li>
+                            <li><a href="#tab1-item5" data-toggle="tab">Pending Reviews and Ratings</a></li>
+                            <li><a href="#tab1-item6" data-toggle="tab">Requests Pending</a></li>
+                            
+                            <li><a href="#tab1-item7" data-toggle="tab">Current Tasks</a></li>
+                            <li><a href="#tab1-item8" data-toggle="tab">Finished Tasks</a></li>
+                            <li><a href="#tab1-item9" data-toggle="tab">Add Task</a></li>
+                            <li><a href="/users/home" >Home</a></li>
+                            
+
+                        </ul>
+                        <div class="tab-content">
+                          <div class="tab-pane fade active in" id="tab1-item1">
+                            <div>
+                  
+                  <form autocomplete="off" action="/services" method="Get" id="service_form">
+                            <div class="autocomplete" style="width:300px;">
+                              <input id="myInput" type="text" style="width: 100%;" name="service" placeholder="Search for a service" class="search-form">
+                              <input type="hidden" name="event_id" value= <%= currentevent._id %> />
+                            <input type="submit" class="btn btn-common" style="position: absolute;" onclick="changeaction()"></div>
+                  </form>
+                  
+                </div>                            
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item2">
+                                <div>
+                  
+                  <ul>
+
+                          <% if(currentevent.user_id) {%>
+                       <table border="1px">
+                        <tbody>
+                          <tr>
+                            <td>user name</td>
+                            <td><%= currentevent.user_name %></td>
+                          </tr>
+                          <tr>
+                            <td>user gender</td>
+                            <td><%= currentevent.user_gender %></td>
+                          </tr>
+                          <tr>
+                            <td>user phone</td>
+                            <td><%= currentevent.user_phone %></td>
+                          </tr>
+                          <tr>
+                            <td>user email</td>
+                            <td><%= currentevent.user_email %></td>
+                          </tr>
+                          <tr>
+                            <td>user address</td>
+                            <td><%= currentevent.user_address %>,<%= currentevent.user_city %>,<%= currentevent.user_state %>, <%= currentevent.user_pin %></td>
+                          </tr>
+                          <tr>
+                            <td>start date</td>
+                            <td><%= currentevent.start_date %></td>
+                          </tr>
+                          <tr>
+                            <td>end date</td>
+                            <td><%= currentevent.end_date %></td>
+                          </tr>
+                          <tr>
+                            <td>other details</td>
+                            <td><%= currentevent.details %></td>
+                          </tr>
+                  
+                          
+                        </tbody>
+                       </table>
+                       <%} %>
+                       <% if(!currentevent.user_id) { %>
+                       <table border="1px">
+                        <tbody>
+                          
+                          <tr>
+                            <td>client address</td>
+                            <td><%= currentevent.address %></td>
+                          </tr>
+                          <tr>
+                            <td>start date</td>
+                            <td><%= currentevent.start_date %></td>
+                          </tr>
+                          <tr>
+                            <td>end date</td>
+                            <td><%= currentevent.end_date %></td>
+                          </tr>
+                          <tr>
+                            <td>other details</td>
+                            <td><%= currentevent.details %></td>
+                          </tr>
+
+                        </tbody>
+                       </table>
+                       <%} %>
+                  </ul>
+                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item3">
+                                <div>
+                  
+                  <ul>
+                    <% for(var i=0; i < event.length; i++) { %>
+                      <% if(event[i].active==false) { %>
+
+                          <table border="1px">
+                            <tbody>
+                              <tr>
+                                <td>artist name</td>
+                                <td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %>(<%=event[i].artist_category%>)</a></td>
+                              </tr>
+                              <tr>
+                                <td>artist gender</td>
+                                <td><%= event[i].artist_gender %></td>
+                              </tr>
+                              <tr>
+                                <td>artist phone</td>
+                                <td><%= event[i].artist_phone %></td>
+                              </tr>
+                              <tr>
+                                <td>artist email</td>
+                                <td><%= event[i].artist_email %></td>
+                              </tr>
+                              
+                              <tr>
+                                <td>start date</td>
+                                <td><%= event[i].start_date %></td>
+                              </tr>
+                              <tr>
+                                <td>end date</td>
+                                <td><%= event[i].end_date %></td>
+                              </tr>
+                              <tr>
+                                <td>other details</td>
+                                <td><%= event[i].details %></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                           <div id="filter">
+
+                       <div>
+                      <% } %>   
+                    <% } %>
+                  </ul>
+                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item4">
+                                <div>
+                  
+                  <ul>
+                    <% for(var i=0; i < event.length; i++) { %>
+                      <% if(event[i].status=="active") { %>
+                       
+                          <table border="1px">
+                            <tbody>
+                              <tr>
+                                <td>artist name</td>
+                                <td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %>(<%=event[i].artist_category%>)</a></td>
+                              </tr>
+                              <tr>
+                                <td>artist gender</td>
+                                <td><%= event[i].artist_gender %></td>
+                              </tr>
+                              <tr>
+                                <td>artist phone</td>
+                                <td><%= event[i].artist_phone %></td>
+                              </tr>
+                              <tr>
+                                <td>artist email</td>
+                                <td><%= event[i].artist_email %></td>
+                              </tr>
+                              
+                              <tr>
+                                <td>start date</td>
+                                <td><%= event[i].start_date %></td>
+                              </tr>
+                              <tr>
+                                <td>end date</td>
+                                <td><%= event[i].end_date %></td>
+                              </tr>
+                              <tr>
+                                <td>other details</td>
+                                <td><%= event[i].details %></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                           <div id="filter">
+                        <form id="cancelForm" action="/emanagers/event/finishReview" method="post">
+                            <input type="hidden" name="id" value= <%= event[i]._id %> />
+                            <input type="hidden" name="event_id" value="<%=event[i].event_id %>" >
+                           <input type="submit" value="End" name="finish">
+                        </form>
+                       <div>
+                      <% } %>   
+                    <% } %>
+                  </ul>
+                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item5">
+                              <div>
+                  
+                  <ul>
+                    <% for(var i=0; i < event.length; i++) { %>
+                      <% if(event[i].status=="review") { %>
+                       
+                          <table border="1px">
+                            <tbody>
+                              <tr>
+                                <td>artist name</td>
+                                <td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %>(<%=event[i].artist_category%>)</a></td>
+                              </tr>
+                              <tr>
+                                <td>artist gender</td>
+                                <td><%= event[i].artist_gender %></td>
+                              </tr>
+                              <tr>
+                                <td>artist phone</td>
+                                <td><%= event[i].artist_phone %></td>
+                              </tr>
+                              <tr>
+                                <td>artist email</td>
+                                <td><%= event[i].artist_email %></td>
+                              </tr>
+                              
+                              <tr>
+                                <td>start date</td>
+                                <td><%= event[i].start_date %></td>
+                              </tr>
+                              <tr>
+                                <td>end date</td>
+                                <td><%= event[i].end_date %></td>
+                              </tr>
+                              <tr>
+                                <td>other details</td>
+                                <td><%= event[i].details %></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                           <div id="filter">
+                        <form id="cancelForm" action="/emanagers/event/review" method="post">
+                            <input type="hidden" name="id" value= <%= event[i]._id %> />
+                            <input type="hidden" name="event_id" value="<%=event[i].event_id %>" >
+                            <input type="text" name="review">
+                            <input type="number" name="rating">
+                           <input type="submit" value="submit" name="submit">
+                        </form>
+                       <div>
+                      <% } %>   
+                    <% } %>
+                  </ul>
+                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item6">
+                              <div>
+                  <ul>
+                    <% for(var i=0; i < event.length; i++) { %>
+                      <% if(event[i].status=="request") { %>
+                       
+                        <table border="1px">
+                          <tbody>
+                            <tr>
+                              <td>artist name</td>
+                              <td><a href="/artists/<%= event[i].artist_id %>"><%= event[i].artist_name %>(<%=event[i].artist_category%>)</a></td>
+                            </tr>
+                            <tr>
+                              <td>artist gender</td>
+                              <td><%= event[i].artist_gender %></td>
+                            </tr>
+                            <tr>
+                              <td>artist phone</td>
+                              <td><%= event[i].artist_phone %></td>
+                            </tr>
+                            <tr>
+                              <td>artist email</td>
+                              <td><%= event[i].artist_email %></td>
+                            </tr>
+                            
+                            <tr>
+                              <td>start date</td>
+                              <td><%= event[i].start_date %></td>
+                            </tr>
+                            <tr>
+                              <td>end date</td>
+                              <td><%= event[i].end_date %></td>
+                            </tr>
+                            <tr>
+                              <td>other details</td>
+                              <td><%= event[i].details %></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                           <div id="filter">
+                        <form id="cancelForm" action="/emanagers/event/finishEvent" method="post">
+                            <input type="hidden" name="id" value= <%= event[i]._id %> />
+                            <input type="hidden" name="event_id" value="<%=event[i].event_id %>" >
+                           <input type="submit" value="End" name="finish">
+                        </form>
+                       <div>
+                      <% } %>   
+                    <% } %>
+                  </ul>
+                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item7">
+
+
+                                <div ng-app="updateTask" ng-controller="MainCtrl">
+    <h4>Current Tasks</h4>
+        <ul>
+    <% for(var i=0; i < task.length; i++) { %>
+    <% if(task[i].complete==false) { %>
+     
+      <table border="1px">
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td><%= task[i].name %></a></td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td><%= task[i].description %></td>
+          </tr>
+          <tr>
+            <td>Artists</td>
+            <td>
+              <ol>
+                <% for(var j=0; j<task[i].artists.length;j++) {%>
+                <li><a href="/artists/<%=task[i].artists[j].id%>"><%= task[i].artists[j].name%>(<%=task[i].artists[j].category%>)</a></li>
+                <%}%>
+              </ol>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+         <div id="filter">
+      <form id="finishTask" action="/emanagers/event/finishTask" method="post">
+          <input type="hidden" name="event_id" value= <%= currentevent._id %> />
+          <input type="hidden" name="task_id" value="<%=task[i]._id %>" >
+         <input type="submit" class="btn" value="End" name="finish">
+          <button ng-click="toggleModal('<%=task[i].name%>','<%=task[i].description%>','<%=task[i]._id%>','<%=currentevent._id%>')" type="button" class="btn" data-toggle="modal" data-target="#myModal">update</button>
+      </form>
+     </div>
+    <% } %>   
+    <% } %>
+      </ul>
+      <!-- Modal -->
+       <div class="modal fade" id="myModal" role="dialog">
+         <div class="modal-dialog">
+         
+           <!-- Modal content-->
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">Modal Header</h4>
+             </div>
+             <div class="modal-body">
+               <form action="/emanagers/event/updatetask" method="Post">
+                <input type="hidden" name="event_id" value="<%= currentevent._id %>">
+                <input type="hidden" name="task_id" value={{taskId}}>
+                <span>name</span>
+                <input type="text" name="name" value={{taskName}}>
+                <span>Description</span>
+                <input type="text" name="description" value={{taskDescription}}>
+                  <li ng-repeat="x in updateartist">
+                  <span>{{x.name}}({{x.category}}) </span>
+                  <input type="checkbox" name="artistname" value="{{x.id}},{{x.name}}&{{x.category}}"  ng-checked=x.check>
+                </li>
+                
+                  <input type="submit" name="submit">
+               </form>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             </div>
+           </div>
+           
+         </div>
+       </div>
+
+
+</div>
+                            <div class="tab-pane fade" id="tab1-item8">
+                              <div>
+                  
+                      <ul>
+                  <% for(var i=0; i < task.length; i++) { %>
+                  <% if(task[i].complete==true) { %>
+                   
+                    <table border="1px">
+                      <tbody>
+                        <tr>
+                          <td>name</td>
+                          <td><%= task[i].name %></a></td>
+                        </tr>
+                        <tr>
+                          <td>description</td>
+                          <td><%= task[i].description %></td>
+                        </tr>
+                        <tr>
+                          <td>Artists</td>
+                          <td>
+                            <ol>
+                              <% for(var j=0; j<task[i].artists.length;j++) {%>
+                              <li><a href="/artists/<%=task[i].artists[j].id%>"><%= task[i].artists[j].name%>(<%=task[i].artist[j].category%>)</a></li>
+                              <%}%>
+                            </ol>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  <% } %>   
+                  <% } %>
+                  </ul>
+
+
+                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item9">
+                              <div>
+                  
+                  <div>
+                    <form action="/emanagers/event/addtask" method="Post">
+                      <input type="hidden" name="event_id" value="<%= currentevent._id %>">
+                      <span>name</span>
+                      <input type="text" name="name">
+                      <span>Description</span>
+                      <input type="text" name="description">
+                      <% for(var i=0; i < event.length; i++) { %>
+                        <% if(event[i].status=="active") { %>
+                        <span><%= event[i].artist_name %> </span>
+                        <input type="checkbox" name="artistname" value="<%= event[i].artist_id%>,<%= event[i].artist_name %>" >
+
+                        <% } %>
+                        <%}%>
+                        <input type="submit" name="submit">
+                    </form>
+                  </div>
+                </div>
+                            </div>
+                        </div>
+                    
+    </div><!--/#table-container-->
+
+
+
+    <script>
+    var updateTask = angular.module('updateTask', []);
+
+    updateTask.controller('MainCtrl', function ($scope,$http) {
+        $scope.showModal = false;
+        $scope.taskName = "";
+        $scope.taskDescription="";
+        $scope.toggleModal = function(taskname,taskdescription,taskid,eventid){
+          $scope.taskName=taskname;
+          $scope.taskDescription=taskdescription;
+          $scope.taskId=taskid;
+          $http.get("/emanagers/event/tasks", {params:{"task_id": taskid, "event_id": eventid}})
+            .then(function(response) {
+                $scope.updateartist = response.data.artistdetails;
+            });
+        };
+      });
+  </script>
+<script type="text/javascript">
+    
+  
+      $("#myInput").click(function(event){
+         $.get("/services/all_category",function(data){
+           var obj=JSON.stringify(data)
+           console.log(data);
+           autocomplete(document.getElementById("myInput"),data.category);
+         });
+             
+      });
+
+      function changeaction(){
+          document.getElementById("service_form").action ="/services/"+document.getElementById("myInput").value;
+      }
+   
+
+     
+  </script>
+
+
+  
+
+  <script src="/js/autocomplete1.js" type="text/javascript"></script>
+  <script src="/js/autocomplete.js" type="text/javascript"></script>
+  
+
+    
+  <script src="/js/app.js"></script>
+  <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/wow.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script> 
+
+  <script src="/js/owl.carousel.min.js"></script>
+  <script src="/js/magnific-popup.min.js"></script>
+  <script src="/js/circle-progress.min.js"></script>
+  <script src="/js/mainpro.js"></script>
+</body>
+</html>

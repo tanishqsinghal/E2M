@@ -3,12 +3,19 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery UI Datepicker - Display inline</title>
+	<title>Artist Profile</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/resources/demos/style.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link rel="stylesheet" href="/stylesheets/app.css">
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+	<link rel="stylesheet" href="/stylesheets/flaticon.css"/>
+	<link rel="stylesheet" href="/stylesheets/owl.carousel.css"/>
+	<link rel="stylesheet" href="/stylesheets/magnific-popup.css"/>
+	<link rel="stylesheet" href="/stylesheets/stylepro.css"/>
 
 
 
@@ -46,72 +53,176 @@
 
 	</style>
 
+	<style type="text/css">
+		.navbar {
+		  overflow: hidden;
+		  background-color: #333;
+		  position: fixed;
+		  top: 0;
+		  width: 100%;
+		  z-index: 5;
+		}
+		.navbar a {
+		  float: left;
+		  display: block;
+		  color: #f2f2f2;
+		  text-align: center;
+		  padding: 14px 16px;
+		  text-decoration: none;
+		  font-size: 17px;
+		}
+
+		.navbar a:hover {
+		  background: #ddd;
+		  color: black;
+		}
+	</style>
+
 </head>
 <body>
+	<div class="navbar">
+		<a href="/users/home">Home</a>
+	</div>
 	
 	
-
-	<table border="1px">
-		<caption>Artist Profile</caption>
-		<thead>
-			<tr>
-				<th>Field</th>
-				<th>Result</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Name</td>
-				<td><%= artist.name %></td>
-			</tr>
-			<tr>
-				<td>Email</td>
-				<td><%= artist.email %></td>
-			</tr>
-			<tr>
-				<td>Phone</td>
-				<td><%= artist.phone %></td>
-			</tr>
-			<tr>
-				<td>Gender</td>
-				<td><%= artist.gender %></td>
-			</tr>
-			<tr>
-				<td>Age</td>
-				<td><%= artist.age %></td>
-			</tr>
-			<tr>
-				<td>City</td>
-				<td><%= artist.city %></td>
-			</tr>
-			<tr>
-				<td>Pin</td>
-				<td><%= artist.pin %></td>
-			</tr>
-			<tr>
-				<td>Qualification</td>
-				<td><%= artist.qualification %></td>
-			</tr>
-			<tr>
-				<td>Category</td>
-				<td><%= artist.sub_category %></td>
-			</tr>
-			<tr>
-				<td>Brief Bio</td>
-				<td><%= artist.small_description %></td>
-			</tr>
-			<tr>
-				<td>Website</td>
-				<td><a href="http://<%= artist.website_link %>" target = "_blank"><%= artist.website_link %></a></td>
-			</tr>
-		</tbody>
-	</table>
+								<!-- Hero section start -->
+								<section class="hero-section spad">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-xl-10 offset-xl-1">
+												<div class="row">
+													<div class="col-lg-6">
+														<div class="hero-text">
+															<h2><%= artist.name %></h2>
+															<p><%= artist.small_description %></p>
+														</div>
+														<div class="hero-info">
+															<h2>General Info</h2>
+															<ul>
+																<li><span>Specialization</span><%= artist.specialization %></li>
+																<li><span>Gender</span><%= artist.gender %></li>
+																<li><span>Age</span><%= artist.age %></li>
+																<li><span>Address</span><%= artist.address %></li>
+																<li><span>E-mail</span><%= artist.email %></li>
+																<li><span>Phone </span><%= artist.phone %></li>
+																<li><span>State</span><%= artist.state %></li>
+																<li><span>Qualification</span><%= artist.qualification %></li>
+																<% if(artist.instid) { %>
+																<li><span>Institute Name</span>
+																	
+																	<form action="/institutes/findinstitute" method="POST">
+																		<input type="text" name="instid" value="<%= artist.instid %>" hidden>
+																		<button onclick="form.submit();" style="background:none!important;
+																		     color:inherit;
+																		     border:none; 
+																		     padding:0!important;
+																		     font: inherit;
+																		     /*border is optional*/
+																		     border-bottom:1px solid #444; 
+																		     cursor: pointer;"><%= artist.instname %></button>
+																		
+																	</form>
+																	<% } else{ %>
+																		<li><span>Institute Name</span><%= artist.instname %></li>
+																	<% } %>
 
 
-	<a href="#modalTerms" class="btn btn-primary nav-btn" data-toggle="modal"
-               data-target="#modalTerms">Hire</a>
+																	</li>
+																<li><span>Website</span><a href="http://<%= artist.website_link %>" target = "_blank"><%= artist.website_link %></a></li>
+																
+															</ul>
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<figure class="hero-image">
+															<img src="/uploads/<%= artist.photo %>" alt="<%= artist.name %>">
+														</figure>
+														<a href="#modalTerms"  data-toggle="modal"
+													               	data-target="#modalTerms" style="display: inline-block;
+														text-transform: uppercase;
+														font-size: 12px;
+														min-width: 100%;
+														min-height: 20px;
+														text-align: center;
+														padding: 20px 10px 15px;
+														position: relative;
+														background-color: #008CBA;
+														margin-right: 10px;
+														border: 2px solid #40424a;
+														color: #fff;
+														font-weight: 700;">Hire</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+								<!-- Hero section end -->
 
-    <%if (chk) { console.log(chk);%>
+
+
+								
+								<!-- Review section start -->
+								<section class="review-section spad pb-0">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-xl-7 offset-xl-2">
+												<div class="section-title">
+													<h2>References</h2>
+												</div>
+												<div class="review-slider owl-carousel">
+													<div class="single-review">
+														<div class="qut">“</div>
+														<p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed. </p>
+														<h3>Robert G. Smith</h3>
+														<h4>Manager, Company</h4>
+													</div>
+													<div class="single-review">
+														<div class="qut">“</div>
+														<p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed. </p>
+														<h3>Robert G. Smith</h3>
+														<h4>Manager, Company</h4>
+													</div>
+													<div class="single-review">
+														<div class="qut">“</div>
+														<p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed. </p>
+														<h3>Robert G. Smith</h3>
+														<h4>Manager, Company</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+								<!-- Review section end -->
+
+
+								<!-- Portfolio section start -->
+								<section class="portfolio-section spad pb-0">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-xl-4 col-md-8 offset-xl-2 ">
+												<div class="section-title">
+													<h2>Portfolio</h2>
+												</div>
+											</div>
+											
+										</div>
+										<div class="portfolio-warp">
+											<% for(var i=artist.photos.length-1; i >= 0 ; i--) { %>
+												<img src="/uploads/<%= artist.photos[i] %>" alt="<%= artist.name %>" style="width: 300px; height: 150px; margin: 10px">
+											<% } %>
+										</div>
+									</div>
+								</section>
+	
+
+	
+
+
+	
+
+    <%if (chk && user) { console.log(chk);%>
     <!-- Terms of Use-->
 	<div class="modal fade" id="modalTerms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	    <div class="modal-dialog modal-lg" role="document">
@@ -152,21 +263,7 @@
 	                            <div class="p-40" id="dt" >
 	                                <h5 class="p-b-20">Enter Your Details</h5>
 	                              	
-	                                <!--<form action="/user/date" method="post">
-	                                <label for="sdate">Start date</label>
-	                                <input id="sdate" name="sdate" type="date" min="2013-12-25" required>
-	                              	<script type="text/javascript">var today = new Date().toISOString().split('T')[0];
-	                              		document.getElementsByName("sdate")[0].setAttribute('min', today);
-	                              	</script>
-
-	                              	<label for="edate">End Date</label>
-	                              	<input id="edate" name="edate" type="date" min="2013-12-25" required>
-	                              	<script type="text/javascript">var today = new Date().toISOString().split('T')[0];
-	                              		document.getElementsByName("edate")[0].setAttribute('min', today);
-	                              	</script>
-     								
-									<a href="#modalTerms" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalTerms" id="dt-content">Hire</a>
-									</form>-->
+	                                
 
 									<form method="post" action="/users/updateuser" id="updateform">	                                    
 										<div class="form-group has-icon"><i class="icon-envelope-o"></i>
@@ -201,18 +298,19 @@
 	                                               placeholder="Pin Code*" required>
 	                                    </div>
 
-	                                    <input type="text" name="artist_id" value= <%= artist._id %>
+	                                    <input type="hidden" name="artist_id" value="<%= artist._id %>" >
+	                                    <input type="hidden" name="artist_category" value=<%= artist.sub_category %> >
 											<label>start date</label>
 											<input type="date" name="start_date">
 											<label>end date</label>
 											<input type="date" name="end_date">
 											<label>small description</label>
 											<input type="text" name="details">
-											<input type="submit" name="submit">
+											<input type="submit" class="btn btn-primary nav-btn" name="submit">
 
 										</form>
 	                             	         
-	                                    <p><a href="#modalContact" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalContact">Next</a></p>
+	                                   
 	                                    
 	                                
 	                            </div>
@@ -253,6 +351,106 @@
 	    </div>
 	</div>
 
+	<% } %>
+
+	<%if(chk && !user) { %>
+	    <!-- Terms of Use-->
+		<div class="modal fade" id="modalTerms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		    <div class="modal-dialog modal-lg" role="document">
+		        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+		                                            class="paper-nav-toggle active"><i></i></a>
+		            <div class="modal-body no-p">
+		                
+		                        
+		                            <div class="p-40">
+		                                <h5 class="p-b-20">Terms of Use</h5>
+		                                <div class="boxed">
+										  1.ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+										  2.ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+										  3.ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+										  4.ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+										  5.ABCDEFGHIJKLMNOPQRSTUVWXYZ
+										</div>
+	    									<p><input type="checkbox" id="agreeCheckbox" name="agreeCheckbox" value="agreeCheckbox" onchange="toggleLink(this);">By clicking this you agree to the term of use</p>
+
+		                                <p><a href="#modalDate" id="agreeLink" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalDate" style="display: none;">Next</a></p>
+
+		                            </div>
+		                       
+		                             
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+		<!-- Select Date-->
+		<div class="modal fade" id="modalDate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		    <div class="modal-dialog modal-lg" role="document" >
+		        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+		                                            class="paper-nav-toggle active"><i></i></a>
+		            <div class="modal-body no-p">
+		                
+		                        
+		                            <div class="p-40" id="dt" >
+		                                <h5 class="p-b-20">Enter Your Details</h5>
+		                              	
+		                                
+
+										<form method="post" action="/emanagers/addartist" id="updateform">	                                    
+											
+
+		                                    <input type="hidden" name="artist_id" value= <%= artist._id %> >
+		                                    <input type="hidden" name="artist_category" value=<%= artist.sub_category %> >
+												<label>start date</label>
+												<input type="date" name="start_date">
+												<label>end date</label>
+												<input type="date" name="end_date">
+												<label>small description</label>
+												<input type="text" name="details">
+												<input type="submit" class="btn btn-primary nav-btn" name="submit">
+
+											</form>
+		                             	         
+		                                    
+		                                    
+		                                
+		                            </div>
+		                       
+		                    
+		                
+		            </div>
+		        </div>
+		    </div>   
+		</div>
+
+		<!-- Contact Artist-->
+		<div class="modal fade" id="modalContact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		    <div class="modal-dialog modal-lg" role="document">
+		        <div class="modal-content no-r "><a href="#" data-dismiss="modal" aria-label="Close"
+		                                            class="paper-nav-toggle active"><i></i></a>
+		            <div class="modal-body no-p">
+		                
+		                        
+		                            <div class="p-40">
+		                                <h5 class="p-b-20">Contact information of Artist</h5>
+		                                <div class="boxed2">
+		                                	<p>Email  -  <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=<%= artist.email %>" target="_blank"><%= artist.email %></a><br>
+		                                	Phone  -  <%= artist.phone %></p>
+
+		                                	<h4>hire me</h4>
+											
+												
+										</div>
+
+		                                <!--<p><a href="/artist/home" class="btn btn-primary nav-btn" data-toggle="modal" data-target="#modalDate" onclick="document.getElementById('updateform').submit();">Confirm</a></p>-->
+
+		                            </div>
+		                       
+		                             
+		            </div>
+		        </div>
+		    </div>
+		</div>
 	<% } %>
 
 	<%if (!chk) { %>
@@ -298,6 +496,12 @@
 	<% } %>
 
 	<script src="/js/app.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/circle-progress.min.js"></script>
+	<script src="/js/mainpro.js"></script>
 	
 </body>
 </html>

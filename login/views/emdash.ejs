@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Evert is the best platform to find and hire artists.">
+    <meta name="author" content="Tanishq Singhal">
+    <title><%= emanager.name %></title>
+    <link rel="stylesheet" href="/stylesheets/autocomplete.css">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/animate.min.css" rel="stylesheet"> 
+    <link href="/stylesheets/lightbox.css" rel="stylesheet"> 
+    <link href="/stylesheets/main.css" rel="stylesheet">
+    <link href="/stylesheets/responsive.css" rel="stylesheet">
+
+
+    <!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+	<link rel="stylesheet" href="/stylesheets/flaticon.css"/>
+	<link rel="stylesheet" href="/stylesheets/owl.carousel.css"/>
+	<link rel="stylesheet" href="/stylesheets/magnific-popup.css"/>
+	<link rel="stylesheet" href="/stylesheets/stylepro.css"/>
+    
+
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+
+
+	<div id="tab-container">
+                
+                    
+                    
+                        <ul id="tab1" class="nav nav-tabs">
+                            <li class="active"><a href="#tab1-item1" data-toggle="tab">Profile</a></li>
+                            <li><a href="#tab1-item6" data-toggle="tab">Notification</a></li>
+                            <li><a href="#tab1-item2" data-toggle="tab">Add Event</a></li>
+                            <li><a href="#tab1-item3" data-toggle="tab">Requests</a></li>
+                            <li><a href="#tab1-item4" data-toggle="tab">Ongoing Work</a></li>
+                            <li><a href="#tab1-item7" data-toggle="tab">Pending Reviews</a></li>
+                            <li><a href="#tab1-item8" data-toggle="tab">Finished Work</a></li>
+                            <li><a href="#tab1-item5" data-toggle="tab">Logout</a></li>
+                            
+                            
+
+                        </ul>
+                        <div class="tab-content">
+                        	<div class="tab-pane fade active in" id="tab1-item1">
+                        		<!-- Hero section start -->
+								<section class="hero-section spad">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-xl-10 offset-xl-1">
+												<div class="row">
+													<div class="col-lg-6">
+														<div class="hero-text">
+
+															<h2><%= emanager.name %></h2>
+															<p><%= emanager.small_description %></p>
+														</div>
+														<div class="hero-info">
+															<h2>General Info</h2>
+															<ul>
+																<li><span>Specialization</span><%= emanager.specialization %></li>
+																<li><span>Gender</span><%= emanager.gender %></li>
+																<li><span>Age</span><%= emanager.age %></li>
+																<li><span>Address</span><%= emanager.address %></li>
+																<li><span>E-mail</span><%= emanager.email %></li>
+																<li><span>Phone </span><%= emanager.phone %></li>
+																<li><span>State</span><%= emanager.state %></li>
+																<li><span>Qualification</span><%= emanager.qualification %></li>
+																<li><span>Institute Name</span>
+																	<form action="/institutes/findinstitute" method="POST">
+																		<input type="text" name="instname" value="<%= emanager.instname %>" hidden>
+																		<button onclick="form.submit();" style="background:none!important;
+																		     color:inherit;
+																		     border:none; 
+																		     padding:0!important;
+																		     font: inherit;
+																		     /*border is optional*/
+																		     border-bottom:1px solid #444; 
+																		     cursor: pointer;"><%= emanager.instname %></button>
+																		
+																	</form></li>
+																<li><span>Website</span><a href="http://<%= emanager.website_link %>" target = "_blank"><%= emanager.website_link %></a></li>
+																<li><a href="#modalUpdate" class="btn btn-primary nav-btn" data-toggle="modal"
+							               data-target="#modalUpdate">Update Profile</a></li>
+															</ul>
+														</div>
+													</div>
+													<div class="col-lg-6">
+														<figure class="hero-image">
+															<img src="/uploads/<%= emanager.photo %>" alt="<%= emanager.name %>">
+															<a href="#modalUpdateDP" class="btn btn-primary nav-btn" data-toggle="modal"
+							               					data-target="#modalUpdateDP" style="width: 100%">Update Profile Picture</a>
+														</figure>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+								<!-- Hero section end -->
+
+
+
+								
+								<!-- Review section start -->
+								<section class="review-section spad pb-0">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-xl-7 offset-xl-2">
+												<div class="section-title">
+													<h2>References</h2>
+												</div>
+												<div class="review-slider owl-carousel">
+													<div class="single-review">
+														<div class="qut">“</div>
+														<p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed. </p>
+														<h3>Robert G. Smith</h3>
+														<h4>Manager, Company</h4>
+													</div>
+													<div class="single-review">
+														<div class="qut">“</div>
+														<p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed. </p>
+														<h3>Robert G. Smith</h3>
+														<h4>Manager, Company</h4>
+													</div>
+													<div class="single-review">
+														<div class="qut">“</div>
+														<p>Sit amet, consectetur adipiscing elit. Sed porttitor orci ut sapien scelerisque viverra. Sed trist ique justo nec mauris efficitur, ut lacinia elit dapibus. In egestas elit in dap ibus laoreet. Duis magna libero, fermentum ut facilisis id, pulvinar eget tortor. Vestibulum pelle ntesque tincidunt lorem, vitae euismod felis porttitor sed. </p>
+														<h3>Robert G. Smith</h3>
+														<h4>Manager, Company</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+								<!-- Review section end -->
+
+
+								<!-- Portfolio section start -->
+								<section class="portfolio-section spad pb-0">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-xl-4 col-md-8 offset-xl-2 ">
+												<div class="section-title">
+													<h2>Portfolio</h2>
+												</div>
+											</div>
+											<div class="col-md-4 text-md-right">
+												<form action="/emanagers/portfolio" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+											              <input id="photos" type="file" name="photos[]" multiple="multiple" required>
+											              <input type="submit" class="site-btn mb-5" name="submit" value="Update">
+											    </form>
+											</div>
+										</div>
+										<div class="portfolio-warp">
+											<% for(var i=0; i < emanager.photos.length; i++) { %>
+												<img src="/uploads/<%= emanager.photos[i] %>" alt="<%= emanager.name %>" style="width: 300px; height: 150px; margin: 10px">
+											<% } %>
+										</div>
+									</div>
+								</section>
+								<!-- Portfolio section end -->
+                                
+
+								
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item2">
+                                <div>
+									<form action="/emanagers/add_event" method="Post">
+											<h5>Add event</h5>
+									   	    <input type="hidden" name="emanager_id" value= "<%= emanager._id %>">
+									   	    <label>Start date</label>
+										<input type="date" name="start_date">
+										<label>End date</label>
+										<input type="date" name="end_date">
+										<label>Address</label>
+										<input type="text" name="address">
+										<label>Other Details</label>
+										<input type="text" name="details">
+										<input type="submit" name="submit">
+									</form>
+								</div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item3">
+                                <div>
+									<ul>
+										<% for(var i=0; i < event.length; i++) { %>
+											<% if(event[i].status=="request") { %>
+
+										   		<table border="1px">
+										   			<tbody>
+										   				<tr>
+										   					<td>user name</td>
+										   					<td><%= event[i].user_name %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>user gender</td>
+										   					<td><%= event[i].user_gender %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>user phone</td>
+										   					<td><%= event[i].user_phone %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>user email</td>
+										   					<td><%= event[i].user_email %></td>
+										   				</tr>
+
+										   				<tr>
+										   					<td>user address</td>
+										   					<td><%= event[i].user_address %>,<%= event[i].user_city %>,<%= event[i].user_state %>, <%= event[i].user_pin %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>start date</td>
+										   					<td><%= event[i].start_date %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>end date</td>
+										   					<td><%= event[i].end_date %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>other details</td>
+										   					<td><%= event[i].details %></td>
+										   				</tr>
+										   			</tbody>
+										   		</table>
+
+										   	   <div id="filter">
+										   	<form id="requestForm" action="/emanagers/acceptRequest" method="post">
+										   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+										   	   <input type="submit" value="accept" name="accept">
+										   	   <input type="submit" value="decline" name="accept">
+										   	</form>
+										   <div>
+										  <% } %>   
+										<% } %>
+									</ul>
+								</div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item4">
+                                <div>
+									<p>Current Work</p>
+									<ul>
+										<% for(var i=0; i < event.length; i++) { %>
+											<% if(event[i].status=="active") { %>
+										   
+										   		<% if(event[i].user_id) {%>
+										   <table border="1px">
+										   	<tbody>
+										   		<tr>
+										   			<td>user name</td>
+										   			<td><%= event[i].user_name %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>user gender</td>
+										   			<td><%= event[i].user_gender %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>user phone</td>
+										   			<td><%= event[i].user_phone %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>user email</td>
+										   			<td><%= event[i].user_email %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>user address</td>
+										   			<td><%= event[i].user_address %>,<%= event[i].user_city %>,<%= event[i].user_state %>, <%= event[i].user_pin %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>start date</td>
+										   			<td><%= event[i].start_date %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>end date</td>
+										   			<td><%= event[i].end_date %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>other details</td>
+										   			<td><%= event[i].details %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>event link</td>
+										   			<td><a href="/emanagers/event/<%= event[i]._id %>">event</a></td>
+										   		</tr>
+										   		
+										   	</tbody>
+										   </table>
+										   <%} %>
+										   <% if(!event[i].user_id) { %>
+										   <table border="1px">
+										   	<tbody>
+										   		
+										   		<tr>
+										   			<td>client address</td>
+										   			<td><%= event[i].address %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>start date</td>
+										   			<td><%= event[i].start_date %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>end date</td>
+										   			<td><%= event[i].end_date %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>other details</td>
+										   			<td><%= event[i].details %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>event link</td>
+										   			<td><a href="/emanagers/event/<%= event[i]._id %>">event</a></td>
+										   		</tr>
+										   	</tbody>
+										   </table>
+										   <%} %>
+										   <form autocomplete="off" action="/services/" method="Get" id="service_form<%=i%>">
+										     <div class="autocomplete" style="width:300px;">
+										       <input id="myinput<%=i%>" type="text" name="service" placeholder="service">
+										        <input type="hidden" name="event_id" value= <%= event[i]._id %> />
+										     </div>
+										     <input type="submit"  onclick="changeaction('service_form<%=i%>','myinput<%=i%>')">
+										   </form>
+										   	   <div id="filter">
+										   	<form id="cancelForm" action="/emanagers/finishEvent" method="post">
+										   	    <input type="hidden" name="id" value= <%= event[i]._id %> />
+										   	   <input type="submit" value="End" name="finish">
+										   	</form>
+										   <div>
+										  <% } %>   
+										<% } %>
+
+
+									</ul>
+								</div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item6">
+                            	<div>
+									<h5>Unread Notification </h5>
+									<ul>
+										<% for(var i=0; i < notification.length; i++) { %>
+												<% if(!notification[i].isread) { %>
+											<li><a href="<%= notification[i].href %>"><%= notification[i].message %></a></li>
+											<% } %>
+										<% } %>			
+									</ul>
+									<h5>Read Notification</h5>
+									<ul>
+										<% for(var i=0; i < notification.length; i++) { %>
+												<% if(notification[i].isread) { %>
+											<li><a href="<%= notification[i].href %>"><%= notification[i].message %></a></li>
+											<% } %>
+										<% } %>			
+									</ul>
+								</div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item7">
+                            	<div>
+
+									<ul>
+										<% for(var i=0; i < event.length; i++) { %>
+											<% if(event[i].status=="review") { %>
+
+										   		<table border="1px">
+										   			<tbody>
+										   				<tr>
+										   					<td>user name</td>
+										   					<td><%= event[i].user_name %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>user gender</td>
+										   					<td><%= event[i].user_gender %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>user phone</td>
+										   					<td><%= event[i].user_phone %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>user email</td>
+										   					<td><%= event[i].user_email %></td>
+										   				</tr>
+
+										   				<tr>
+										   					<td>user address</td>
+										   					<td><%= event[i].user_address %>,<%= event[i].user_city %>,<%= event[i].user_state %>, <%= event[i].user_pin %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>start date</td>
+										   					<td><%= event[i].start_date %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>end date</td>
+										   					<td><%= event[i].end_date %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>other details</td>
+										   					<td><%= event[i].details %></td>
+										   				</tr>
+										   				<tr>
+										   					<td>event link</td>
+										   					<td><a href="/emanagers/event/<%= event[i]._id %>">event</a></td>
+										   				</tr>
+										   			</tbody>
+										   		</table>
+
+								
+										  <% } %>   
+										<% } %>
+									</ul>
+								</div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item8">
+                            	<div>
+									
+									<ul>
+										<% for(var i=0; i < pastevent.length; i++) { %>
+											
+										   
+										   		<% if(pastevent[i].user_id) {%>
+										   <table border="1px">
+										   	<tbody>
+										   		<tr>
+										   			<td>user name</td>
+										   			<td><%= pastevent[i].user_name %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>user gender</td>
+										   			<td><%= pastevent[i].user_gender %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>user phone</td>
+										   			<td><%= pastevent[i].user_phone %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>user email</td>
+										   			<td><%= pastevent[i].user_email %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>user address</td>
+										   			<td><%= pastevent[i].user_address %>,<%= pastevent[i].user_city %>,<%= pastevent[i].user_state %>, <%= pastevent[i].user_pin %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>start date</td>
+										   			<td><%= pastevent[i].start_date %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>end date</td>
+										   			<td><%= pastevent[i].end_date %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>other details</td>
+										   			<td><%= pastevent[i].details %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>review</td>
+										   			<td><%= pastevent[i].review %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>rating</td>
+										   			<td><%= pastevent[i].rating %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>event link</td>
+										   			<td><a href="/emanagers/event/<%= pastevent[i]._id %>">event</a></td>
+										   		</tr>
+										   		
+										   	</tbody>
+										   </table>
+										   <%} %>
+										   <% if(!pastevent[i].user_id) { %>
+										   <table border="1px">
+										   	<tbody>
+										   		
+										   		<tr>
+										   			<td>client address</td>
+										   			<td><%= pastevent[i].address %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>start date</td>
+										   			<td><%= pastevent[i].start_date %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>end date</td>
+										   			<td><%= pastevent[i].end_date %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>other details</td>
+										   			<td><%= pastevent[i].details %></td>
+										   		</tr>
+										   		<tr>
+										   			<td>event link</td>
+										   			<td><a href="/emanagers/event/<%= pastevent[i]._id %>">event</a></td>
+										   		</tr>
+										   	</tbody>
+										   </table>
+										   <%} %>
+
+									 
+										<% } %>
+
+
+									</ul>
+								</div>
+                            </div>
+                            <div class="tab-pane fade" id="tab1-item5">
+                                <a href="/emanagers/logout" class="btn btn-warning">Confirm Logout</a>
+                            </div>
+                        </div>
+                    
+    </div><!--/#table-container-->
+
+
+	
+
+	
+
+	
+
+
+	
+
+    <!-- Update Profile-->
+	<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content no-r ">
+	            <div class="modal-body no-p">
+	                <a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i>X</i></a>
+	                        
+	                            <div class="p-40">
+	                                
+                                <form method="post" action="/artists/updateartist">
+                                    <div class="form-group has-icon"><i class="icon-user-circle"></i>
+                                        <input name="name" type="text" class="form-control form-control-lg"
+                                               placeholder="Your Name" value="<%= emanager.name %>">
+                                    </div>
+                                    <div >
+                                    	<select name="gender" class="form-control form-control-lg">
+                                          <option value="Male" selected="selected">Male</option>
+										  <option value="Female">Female</option>
+										</select><br>
+                                        
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="age" type="text" class="form-control form-control-lg"
+                                               placeholder="Age" value="<%= emanager.age %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="address" type="text" class="form-control form-control-lg"
+                                               placeholder="Street Address" value="<%= emanager.address %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="city" type="text" class="form-control form-control-lg"
+                                               placeholder="City" value="<%= emanager.city %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="state" type="text" class="form-control form-control-lg"
+                                               placeholder="State" value="<%= emanager.state %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="pin" type="text" class="form-control form-control-lg"
+                                               placeholder="Pin Code" value="<%= emanager.pin %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="qualification" type="text" class="form-control form-control-lg"
+                                               placeholder="Qualification" value="<%= emanager.qualification %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="specialization" type="text" class="form-control form-control-lg"
+                                               placeholder="Specialization" value="<%= emanager.specialization %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                    	<input name="bio" type="text" class="form-control form-control-lg"
+                                               placeholder="Brief Bio" value="<%= emanager.small_description %>">
+                                    </div>
+                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+                                        <input name="link" type="text" class="form-control form-control-lg"
+                                               placeholder="Your Website Link" value="<%= emanager.website_link %>">
+                                    </div>
+                                    <!--<div class="form-group has-icon"><i class="icon-user-secret"></i>
+                                        <input name="aimage" type="file" class="form-control form-control-lg"
+                                               placeholder="Profile Picture *" required>
+                                    </div>-->
+                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Update">
+                                </form>
+	                            </div>
+	                       
+	                             
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<!-- Update Profile Picture-->
+	<div class="modal fade" id="modalUpdateDP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content no-r ">
+	            <div class="modal-body no-p">
+	                <a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i>X</i></a>
+	                        
+	                            <div class="p-40">
+	                                
+                                <form method="post" action="/emanagers/updateProfilePicture" enctype="multipart/form-data">
+                                    <div class="form-group has-icon"><i class="icon-user-circle"></i>
+                                    	
+											              <input id="photos" type="file" name="aimage" class="form-control form-control-lg">
+                                        
+                                    </div>
+                                    
+                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Update">
+                                </form>
+	                            </div>
+	                       
+	                             
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+	<script src="/js/autocomplete.js" type="text/javascript"></script>
+	<script type="text/javascript">
+
+	    /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+	    var obj=<%-JSON.stringify(category)%> ;
+	    <% for(var i=0;i<event.length;i++) { %>
+	    	<% if(event[i].status=="active") { %>
+	    autocomplete(document.getElementById("myinput<%=i%>"),obj);
+	    <%}%>
+	    <%}%>
+	    function changeaction(ser,my){
+
+	        document.getElementById(ser).action ="/services/"+document.getElementById(my).value;
+	    }
+	</script>
+
+
+	
+	<script src="/js/app.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/wow.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script> 
+
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/circle-progress.min.js"></script>
+	<script src="/js/mainpro.js"></script>
+</body>
+</html>

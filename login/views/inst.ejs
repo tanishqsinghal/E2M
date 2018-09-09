@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= institute.name %></title>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Evert is the best platform to find and hire artists.">
+    <meta name="author" content="Tanishq Singhal">
+    <link rel="stylesheet" href="/stylesheets/autocomplete.css">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+    <link href="/stylesheets/animate.min.css" rel="stylesheet"> 
+    <link href="/stylesheets/lightbox.css" rel="stylesheet"> 
+    <link href="/stylesheets/main.css" rel="stylesheet">
+    <link href="/stylesheets/responsive.css" rel="stylesheet">
+
+
+    <!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+	<link rel="stylesheet" href="/stylesheets/flaticon.css"/>
+	<link rel="stylesheet" href="/stylesheets/owl.carousel.css"/>
+	<link rel="stylesheet" href="/stylesheets/magnific-popup.css"/>
+	<link rel="stylesheet" href="/stylesheets/stylepro.css"/>
+    
+
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/images/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+<body>
+	<div>
+		<a href="/users/home">Home</a>
+	</div>
+	
+
+
+		<table border="1px"> 
+			<caption><%= institute.name %></caption>
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th>Result</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Name</td>
+					<td><%= institute.name %></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><%= institute.address %></td>
+				</tr>
+				<tr>
+					<td>City</td>
+					<td><%= institute.city %></td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td><%= institute.state %></td>
+				</tr>
+				<tr>
+					<td>Pin</td>
+					<td><%= institute.pin %></td>
+				</tr>
+				<tr>
+					<td>Description</td>
+					<td><%= institute.small_description %></td>
+				</tr>
+				<tr>
+					<td>Count</td>
+					<td><%= institute.count %></td>
+				</tr>
+				<tr>
+					<td>Website</td>
+					<td><a href="http://<%= institute.website_link %>" target = "_blank"><%= institute.website_link %></a></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<% if(admin) { %>
+			<a href="#modalInstitute" data-toggle="modal">Update Institute</a>
+		<% } %>
+
+
+	<!-- Update Institute Page-->
+	<div class="modal fade" id="modalInstitute" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content no-r ">
+	            <div class="modal-body no-p">
+	                <a href="#" data-dismiss="modal" aria-label="Close"
+	                                            class="paper-nav-toggle active"><i>X</i></a>
+	                        
+	                            <div class="p-40">
+	                                
+	                                <form method="post" action="/institutes/updateInstitute">
+	                                    <input type="text" name="instid" value="<%= institute._id %>" hidden>
+	                                    <div class="form-group has-icon"><i class="icon-user-circle"></i>
+	                                        <input name="name" type="text" class="form-control form-control-lg" value="<%= institute.name %>" 
+	                                               placeholder="Institute Name">
+	                                    </div>
+	                                    
+	                                    
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="address" type="text" class="form-control form-control-lg" value="<%= institute.address %>" 
+	                                               placeholder="Street Address">
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="city" type="text" class="form-control form-control-lg" value="<%= institute.city %>" 
+	                                               placeholder="City">
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="state" type="text" class="form-control form-control-lg" value="<%= institute.state %>" 
+	                                               placeholder="State">
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="pin" type="text" class="form-control form-control-lg" value="<%= institute.pin %>" 
+	                                               placeholder="Pin Code">
+	                                    </div>
+	                                    
+	                                    
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                    	<input name="bio" type="text" class="form-control form-control-lg" value="<%= institute.small_description %>" 
+	                                               placeholder="Small Description">
+	                                    </div>
+	                                    <div class="form-group has-icon"><i class="icon-envelope-o"></i>
+	                                        <input name="link" type="text" class="form-control form-control-lg" value="<%= institute.website_link %>" 
+	                                               placeholder="Institute Website Link">
+	                                    </div>
+	                                    
+	                                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Update">
+	                                </form>
+	                            </div>
+	                       
+	                             
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+	<script src="/js/app.js"></script>
+	<script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="/js/wow.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script> 
+
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/circle-progress.min.js"></script>
+	<script src="/js/mainpro.js"></script>
+	<script src="/js/sortcategory.js"></script>
+
+</body>
+</html>

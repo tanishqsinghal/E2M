@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>INSTITUTES</title>
+
+
+</head>
+<body>
+	<div>
+		<a href="/users/home">Home</a>
+	</div>
+	
+
+	<% for(var i=0; i < institutes.length; i++) { %>
+		<table border="1px"> 
+			<caption><%= institutes[i].name %></caption>
+			<thead>
+				<tr>
+					<th>Field</th>
+					<th>Result</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Name</td>
+					<td><%= institutes[i].name %></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><%= institutes[i].address %></td>
+				</tr>
+				<tr>
+					<td>City</td>
+					<td><%= institutes[i].city %></td>
+				</tr>
+				<tr>
+					<td>State</td>
+					<td><%= institutes[i].state %></td>
+				</tr>
+				<tr>
+					<td>Pin</td>
+					<td><%= institutes[i].pin %></td>
+				</tr>
+				<tr>
+					<td>Description</td>
+					<td><%= institutes[i].small_description %></td>
+				</tr>
+				<tr>
+					<td>Website</td>
+					<td><a href="http://<%= institutes[i].website_link %>" target = "_blank"><%= institutes[i].website_link %></a></td>
+					
+				</tr>
+			</tbody>
+		</table>
+	<% } %>
+
+</body>
+</html>
